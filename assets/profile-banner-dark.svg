@@ -1,47 +1,111 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="340" viewBox="0 0 1200 340" role="img" aria-labelledby="title desc">
   <title id="title">吴乐阳的 GitHub 个人主页横幅</title>
-  <desc id="desc">吴乐阳，2001年08月29日，Java Backend 转向 LLM Application Engineering。</desc>
+  <desc id="desc">吴乐阳，2001年08月29日，Java Backend 转向 LLM Application Engineering，右侧为缓慢呼吸的绿色 AI 核心。</desc>
   <defs>
-    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0E4429"/>
-      <stop offset="1" stop-color="#006D32"/>
-    </linearGradient>
     <linearGradient id="career" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#39D353"/>
       <stop offset="1" stop-color="#26A641"/>
     </linearGradient>
+    <linearGradient id="core" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7EE787"/>
+      <stop offset="0.55" stop-color="#39D353"/>
+      <stop offset="1" stop-color="#006D32"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#39D353" stop-opacity="0.2"/>
+      <stop offset="0.58" stop-color="#0E4429" stop-opacity="0.34"/>
+      <stop offset="1" stop-color="#0D1117" stop-opacity="0"/>
+    </radialGradient>
     <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
-      <path d="M32 0H0V32" fill="none" stroke="#22342A" stroke-width="1" opacity="0.8"/>
+      <path d="M32 0H0V32" fill="none" stroke="#22342A" stroke-width="1" opacity="0.82"/>
     </pattern>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="8" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
     <clipPath id="frame">
       <rect x="1" y="1" width="1198" height="338" rx="28"/>
     </clipPath>
   </defs>
 
+  <style>
+    .ai-orbit { transform-origin: 0 0; animation: ai-spin 18s linear infinite; }
+    .ai-orbit-reverse { transform-origin: 0 0; animation: ai-spin-reverse 11s linear infinite; }
+    .ai-bloom { transform-origin: 0 0; animation: ai-breathe 3.8s ease-in-out infinite; }
+    .ai-flow { animation: ai-flow 6s linear infinite; }
+    .ai-core { animation: ai-glow 3.8s ease-in-out infinite; }
+    .ai-ray { animation: ai-ray 4.2s ease-in-out infinite; }
+    @keyframes ai-spin { to { transform: rotate(360deg); } }
+    @keyframes ai-spin-reverse { to { transform: rotate(-360deg); } }
+    @keyframes ai-breathe {
+      0%, 100% { transform: scale(0.96); }
+      50% { transform: scale(1.035); }
+    }
+    @keyframes ai-flow { to { stroke-dashoffset: -72; } }
+    @keyframes ai-glow {
+      0%, 100% { opacity: 0.58; }
+      50% { opacity: 1; }
+    }
+    @keyframes ai-ray {
+      0%, 100% { opacity: 0.34; }
+      42%, 68% { opacity: 1; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .ai-orbit, .ai-orbit-reverse, .ai-bloom, .ai-flow, .ai-core, .ai-ray { animation: none; }
+    }
+  </style>
+
   <g clip-path="url(#frame)">
     <rect width="1200" height="340" fill="#0D1117"/>
-    <rect width="880" height="340" fill="url(#grid)" opacity="0.72"/>
-    <path d="M830 0H1200V340H700Z" fill="url(#panel)"/>
-    <path d="M792 0H826L696 340H662Z" fill="#39D353" opacity="0.18"/>
-
-    <text x="836" y="176" fill="#F0F6FC" font-family="'Segoe UI',Inter,Arial,sans-serif" font-size="100" font-weight="800" letter-spacing="8">WLY</text>
-    <path d="M838 205H1128" stroke="#F0F6FC" stroke-width="2" opacity="0.38"/>
-    <text x="838" y="238" fill="#DCFCE7" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="15" font-weight="600" letter-spacing="2.5" opacity="0.9">JAVA · LLM · SYSTEMS</text>
-    <text x="1090" y="302" fill="#DCFCE7" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="14" letter-spacing="2" opacity="0.6">01</text>
+    <rect width="1200" height="340" fill="url(#grid)" opacity="0.72"/>
+    <circle cx="970" cy="144" r="154" fill="url(#halo)"/>
   </g>
 
   <rect x="1" y="1" width="1198" height="338" rx="28" fill="none" stroke="#30363D" stroke-width="2"/>
+  <path d="M760 54V286" stroke="#244D32" stroke-width="2"/>
 
+  <!-- CUSTOMIZE: identity -->
   <circle cx="60" cy="56" r="5" fill="#39D353"/>
   <text x="77" y="61" fill="#7EE787" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="13" font-weight="700" letter-spacing="1.6">WLYAAAAA / PROFILE</text>
 
   <text x="58" y="164" fill="#F0F6FC" font-family="'Segoe UI','Microsoft YaHei','Noto Sans CJK SC',sans-serif" font-size="76" font-weight="720" letter-spacing="2">吴乐阳</text>
   <text x="62" y="209" fill="#9BA7B4" font-family="'Segoe UI','Microsoft YaHei','Noto Sans CJK SC',sans-serif" font-size="23">2001年08月29日</text>
 
+  <!-- CUSTOMIZE: career path -->
   <path d="M58 246H681" stroke="#244D32" stroke-width="2"/>
   <path d="M58 246H196" stroke="url(#career)" stroke-width="4"/>
   <text x="58" y="286" fill="#7EE787" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="19" font-weight="700">Java Backend</text>
   <path d="M232 278H309" stroke="url(#career)" stroke-width="3" stroke-linecap="round"/>
   <path d="m301 270 10 8-10 8" fill="none" stroke="#3FB950" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
   <text x="338" y="286" fill="#56D364" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="19" font-weight="700">LLM Application Engineering</text>
+
+  <!-- REUSABLE: animated AI bloom -->
+  <g transform="translate(970 144)">
+    <circle r="96" fill="#0D2116" fill-opacity="0.66" stroke="#1B5E35" stroke-width="2"/>
+    <g class="ai-orbit">
+      <circle r="80" fill="none" stroke="#26A641" stroke-width="2" stroke-dasharray="5 13" class="ai-flow" opacity="0.92"/>
+      <circle cx="80" cy="0" r="5" fill="#39D353"/>
+      <circle cx="-40" cy="69.3" r="4" fill="#26A641"/>
+      <circle cx="-40" cy="-69.3" r="3.5" fill="#0E4429" stroke="#39D353"/>
+    </g>
+    <g class="ai-orbit-reverse">
+      <circle r="62" fill="none" stroke="#39D353" stroke-width="3" stroke-dasharray="30 360" opacity="0.72"/>
+      <circle cx="-62" cy="0" r="3.5" fill="#39D353"/>
+    </g>
+    <g class="ai-bloom" fill="none" stroke="url(#core)" stroke-linecap="round">
+      <path class="ai-ray" d="M0-23C-10-36-8-55 5-69" stroke-width="7" style="animation-delay:-0.0s"/>
+      <path class="ai-ray" d="M0-23C-10-36-8-55 5-69" stroke-width="7" transform="rotate(60)" style="animation-delay:-0.7s"/>
+      <path class="ai-ray" d="M0-23C-10-36-8-55 5-69" stroke-width="7" transform="rotate(120)" style="animation-delay:-1.4s"/>
+      <path class="ai-ray" d="M0-23C-10-36-8-55 5-69" stroke-width="7" transform="rotate(180)" style="animation-delay:-2.1s"/>
+      <path class="ai-ray" d="M0-23C-10-36-8-55 5-69" stroke-width="7" transform="rotate(240)" style="animation-delay:-2.8s"/>
+      <path class="ai-ray" d="M0-23C-10-36-8-55 5-69" stroke-width="7" transform="rotate(300)" style="animation-delay:-3.5s"/>
+    </g>
+    <circle r="27" fill="#39D353" opacity="0.3" filter="url(#glow)" class="ai-core"/>
+    <polygon points="0,-22 19,-11 19,11 0,22 -19,11 -19,-11" fill="url(#core)"/>
+    <circle r="7" fill="#F0F6FC" opacity="0.94"/>
+  </g>
+  <text x="970" y="274" text-anchor="middle" fill="#7EE787" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="13" font-weight="700" letter-spacing="2.1">AI APPLICATION ENGINEERING</text>
 </svg>

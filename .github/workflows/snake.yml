@@ -22,6 +22,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      - name: Check out growth enhancer
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
       - name: Generate light and dark contribution snakes
         uses: Platane/snk/svg-only@d8f6715049803e982ee5ff501b6b9b7d5deeb09b # v3
         with:
@@ -29,6 +32,12 @@ jobs:
           outputs: |
             dist/github-contribution-grid-snake.svg?color_snake=#216E39&color_dots=#EBEDF0,#9BE9A8,#40C463,#30A14E,#216E39
             dist/github-contribution-grid-snake-dark.svg?color_snake=#39D353&color_dots=#161B22,#0E4429,#006D32,#26A641,#39D353
+
+      - name: Grow the snake as contribution cells are eaten
+        run: |
+          python3 scripts/enhance_snake.py --max-segments 10 \
+            dist/github-contribution-grid-snake.svg \
+            dist/github-contribution-grid-snake-dark.svg
 
       - name: Publish generated SVG files
         uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4

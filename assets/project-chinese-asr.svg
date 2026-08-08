@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="560" height="180" viewBox="0 0 560 180" role="img" aria-labelledby="title desc">
+  <title id="title">ChineseASR</title>
+  <desc id="desc">本地优先的中文语音识别、路由与审核流程。</desc>
+  <!-- CUSTOMIZE: title, desc, visible name, summary, tags and decoration; keep the 560 x 180 viewBox. -->
+  <defs>
+    <linearGradient id="accent" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#39D353"/>
+      <stop offset="1" stop-color="#238636"/>
+    </linearGradient>
+  </defs>
+  <style>
+    .card { fill: #F7FBF8; stroke: #CDEBD5; }
+    .eyebrow, .arrow, .tag-text { fill: #216E39; }
+    .name { fill: #17201A; }
+    .summary { fill: #52605A; }
+    .tag { fill: #EAF6ED; stroke: #CDEBD5; }
+    .wave { fill: none; stroke: #9BE9A8; opacity: 0.5; }
+    @media (prefers-color-scheme: dark) {
+      .card { fill: #0F1712; stroke: #244D32; }
+      .eyebrow, .arrow, .tag-text { fill: #7EE787; }
+      .name { fill: #F0F6FC; }
+      .summary { fill: #A8B3AB; }
+      .tag { fill: #13271A; stroke: #245C35; }
+      .wave { stroke: #26A641; opacity: 0.34; }
+    }
+  </style>
+  <rect class="card" x="1" y="1" width="558" height="178" rx="20" stroke-width="2"/>
+  <rect x="1" y="1" width="7" height="178" rx="3.5" fill="url(#accent)"/>
+  <circle cx="30" cy="29" r="4" fill="#2DA44E"/>
+  <text class="eyebrow" x="43" y="34" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="12" font-weight="700" letter-spacing="1.7">FEATURED / 02</text>
+  <text class="arrow" x="512" y="49" font-family="'Segoe UI Symbol','Segoe UI',sans-serif" font-size="27" font-weight="600">↗</text>
+  <path class="wave" d="M448 132c12-28 24-28 36 0s24 28 36 0" stroke-width="3" stroke-linecap="round"/>
+  <path class="wave" d="M456 145c9-17 18-17 27 0s18 17 27 0" stroke-width="2" stroke-linecap="round"/>
+  <text class="name" x="28" y="77" font-family="'Segoe UI',Inter,Arial,sans-serif" font-size="25" font-weight="700">ChineseASR</text>
+  <text class="summary" x="28" y="108" font-family="'Segoe UI','Microsoft YaHei',sans-serif" font-size="16">中文语音识别 · 本地优先 · 双模型审核</text>
+  <g font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="13" font-weight="600">
+    <rect class="tag" x="28" y="130" width="56" height="28" rx="14"/>
+    <text class="tag-text" x="44" y="149">ASR</text>
+    <rect class="tag" x="92" y="130" width="56" height="28" rx="14"/>
+    <text class="tag-text" x="108" y="149">GPU</text>
+    <rect class="tag" x="156" y="130" width="82" height="28" rx="14"/>
+    <text class="tag-text" x="170" y="149">Privacy</text>
+  </g>
+</svg>

@@ -1,16 +1,16 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-banner-dark.svg?v=green-editorial-1">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/profile-banner-light.svg?v=green-editorial-1">
-    <img alt="吴乐阳，2001年08月29日，Java Backend 转向 LLM Application Engineering" src="./assets/profile-banner-light.svg?v=green-editorial-1" width="100%">
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-banner-dark.svg?v=ai-bloom-1">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/profile-banner-light.svg?v=ai-bloom-1">
+    <img alt="吴乐阳，2001年08月29日，Java Backend 转向 LLM Application Engineering" src="./assets/profile-banner-light.svg?v=ai-bloom-1" width="100%">
   </picture>
 </p>
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake-dark.svg?v=github-green-1">
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake.svg?v=github-green-1">
-    <img alt="吴乐阳的 GitHub 提交贡献蛇动画" src="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake.svg?v=github-green-1" width="100%">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake-dark.svg?v=growing-snake-1">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake.svg?v=growing-snake-1">
+    <img alt="吴乐阳的 GitHub 贡献蛇；吞噬贡献格时会逐步增长" src="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake.svg?v=growing-snake-1" width="100%">
   </picture>
 </p>
 
@@ -72,32 +72,15 @@
 ### 🚀 精选项目
 
 <!-- FEATURED_PROJECTS:START -->
-<table>
-  <tr>
-    <td width="50%" valign="top">
-      <strong><a href="https://github.com/wlyaaaaa/wechat-history-ai-bridge">WeChat History AI Bridge</a></strong><br><br>
-      把本地微信能力整理成适合 AI Agent 使用的安全接口。<br><br>
-      <code>Python</code> <code>OpenAPI</code> <code>Local-first</code>
-    </td>
-    <td width="50%" valign="top">
-      <strong><a href="https://github.com/wlyaaaaa/ChineseASR">ChineseASR</a></strong><br><br>
-      本地优先的中文语音识别、路由与审核流程。<br><br>
-      <code>ASR</code> <code>GPU</code> <code>Privacy</code>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <strong><a href="https://github.com/wlyaaaaa/LocalOCR">LocalOCR</a></strong><br><br>
-      面向中文文档和截图的本地 GPU OCR 工具链。<br><br>
-      <code>OCR</code> <code>Python</code> <code>Local AI</code>
-    </td>
-    <td width="50%" valign="top">
-      <strong><a href="https://github.com/wlyaaaaa/llm-backend-toolkit">llm-backend-toolkit</a></strong><br><br>
-      为顶层 AI 模型提供异步、上下文高效的后端能力。<br><br>
-      <code>LLM</code> <code>Async</code> <code>Tooling</code>
-    </td>
-  </tr>
-</table>
+<!-- CUSTOMIZE: 替换项目时，同时更新 href、alt 与对应的 assets/project-*.svg；布局无需改动。 -->
+<p align="center">
+  <a href="https://github.com/wlyaaaaa/wechat-history-ai-bridge"><img src="./assets/project-wechat-history-ai-bridge.svg?v=1" alt="WeChat History AI Bridge：本地微信能力到 AI Agent 安全接口" width="49%"></a>
+  <a href="https://github.com/wlyaaaaa/ChineseASR"><img src="./assets/project-chinese-asr.svg?v=1" alt="ChineseASR：本地优先的中文语音识别与审核流程" width="49%"></a>
+</p>
+<p align="center">
+  <a href="https://github.com/wlyaaaaa/LocalOCR"><img src="./assets/project-local-ocr.svg?v=1" alt="LocalOCR：中文文档与截图的本地 GPU OCR" width="49%"></a>
+  <a href="https://github.com/wlyaaaaa/llm-backend-toolkit"><img src="./assets/project-llm-backend-toolkit.svg?v=1" alt="llm-backend-toolkit：异步且上下文高效的模型后端工具链" width="49%"></a>
+</p>
 <!-- FEATURED_PROJECTS:END -->
 
 ---
