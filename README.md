@@ -1,16 +1,16 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-banner-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/profile-banner-light.svg">
-    <img alt="吴乐阳，2001年08月29日，Java Backend 转向 LLM Application Engineering" src="./assets/profile-banner-light.svg" width="100%">
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-banner-dark.svg?v=green-editorial-1">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/profile-banner-light.svg?v=green-editorial-1">
+    <img alt="吴乐阳，2001年08月29日，Java Backend 转向 LLM Application Engineering" src="./assets/profile-banner-light.svg?v=green-editorial-1" width="100%">
   </picture>
 </p>
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake.svg">
-    <img alt="吴乐阳的 GitHub 提交贡献蛇动画" src="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake.svg" width="100%">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake-dark.svg?v=github-green-1">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake.svg?v=github-green-1">
+    <img alt="吴乐阳的 GitHub 提交贡献蛇动画" src="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake.svg?v=github-green-1" width="100%">
   </picture>
 </p>
 
