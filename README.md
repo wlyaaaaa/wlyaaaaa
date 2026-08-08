@@ -23,7 +23,8 @@
 - 💡 我相信 **AI 时代，创意比技术更重要**
 - 🌱 正在深入研究 **AI Agent、RAG、MCP、本地多模态 AI**
 - 💬 可以找我聊聊 **产品与技术建议**
-- 📫 联系方式：**[wlyaaaaaa@gmail.com](mailto:wlyaaaaaa@gmail.com)**
+- 📫 常用邮箱：**[wlyaaaaaa@gmail.com](mailto:wlyaaaaaa@gmail.com)**
+- 🏢 个人企业邮箱：**[hello@wly0829.cn](mailto:hello@wly0829.cn)**
 - 🌐 个人网站：**[wly0829.cn](https://wly0829.cn)**
 
 ---
