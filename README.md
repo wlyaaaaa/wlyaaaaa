@@ -20,8 +20,9 @@
 
 - ☕ Java 后端背景，熟悉 **Spring Boot、MySQL、Redis、Kafka、MQ、Elasticsearch**
 - 🤖 目前专注 **AI 大模型应用工程**，把模型能力接入真实业务与个人工作流
+- 💡 我相信 **AI 时代，创意比技术更重要**
 - 🌱 正在深入研究 **AI Agent、RAG、MCP、本地多模态 AI**
-- 💬 可以找我聊聊 **大模型应用落地、Agent 工程、Java 后端、Windows 自动化**
+- 💬 可以找我聊聊 **产品与技术建议**
 - 📫 联系方式：**[wlyaaaaaa@gmail.com](mailto:wlyaaaaaa@gmail.com)**
 - 🌐 个人网站：**[wly0829.cn](https://wly0829.cn)**
 
