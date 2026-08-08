@@ -18,7 +18,7 @@
 
 ### 🧑‍💻 关于我
 
-- ☕ Java 后端工程师出身，熟悉 **Spring Boot、MySQL、Redis、Kafka、MQ、Elasticsearch**
+- ☕ Java 后端背景，熟悉 **Spring Boot、MySQL、Redis、Kafka、MQ、Elasticsearch**
 - 🤖 目前专注 **AI 大模型应用工程**，把模型能力接入真实业务与个人工作流
 - 🌱 正在深入研究 **AI Agent、RAG、MCP、本地多模态 AI**
 - 💬 可以找我聊聊 **大模型应用落地、Agent 工程、Java 后端、Windows 自动化**
