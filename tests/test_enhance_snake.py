@@ -28,7 +28,7 @@ class EnhanceSnakeTests(unittest.TestCase):
     def test_adds_six_tail_segments_at_real_consumption_milestones(self) -> None:
         result = enhance_svg(SAMPLE_SVG, max_segments=10)
 
-        self.assertIn("growing-snake:v1", result)
+        self.assertIn("growing-snake:v2", result)
         self.assertEqual(6, result.count('class="sg sg'))
         self.assertIn('class="sg sg4"', result)
         self.assertIn('class="sg sg9"', result)
@@ -46,6 +46,30 @@ class EnhanceSnakeTests(unittest.TestCase):
         twice = enhance_svg(once, max_segments=10)
 
         self.assertEqual(once, twice)
+
+    def test_adds_a_replaceable_animated_transition(self) -> None:
+        result = enhance_svg(
+            SAMPLE_SVG,
+            max_segments=4,
+            transition_text="创意决定方向 & 工程让它落地",
+        )
+
+        self.assertIn('class="sg-transition"', result)
+        self.assertIn('class="sg-transition-text"', result)
+        self.assertIn("创意决定方向 &amp; 工程让它落地", result)
+        self.assertIn("@keyframes sg-transition-flow", result)
+        self.assertIn("@keyframes sg-transition-breathe", result)
+        self.assertIn("prefers-reduced-motion:reduce", result)
+
+    def test_combines_growth_and_transition_in_one_output(self) -> None:
+        result = enhance_svg(
+            SAMPLE_SVG,
+            max_segments=10,
+            transition_text="创意决定方向 · 工程让它落地",
+        )
+
+        self.assertEqual(6, result.count('class="sg sg'))
+        self.assertIn('class="sg-transition"', result)
 
     def test_returns_unchanged_svg_when_there_is_nothing_to_eat(self) -> None:
         no_cells = SAMPLE_SVG.replace(

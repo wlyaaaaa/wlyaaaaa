@@ -35,7 +35,9 @@ jobs:
 
       - name: Grow the snake as contribution cells are eaten
         run: |
-          python3 scripts/enhance_snake.py --max-segments 10 \
+          python3 scripts/enhance_snake.py \
+            --max-segments 10 \
+            --transition-text "创意决定方向 · 工程让它落地" \
             dist/github-contribution-grid-snake.svg \
             dist/github-contribution-grid-snake-dark.svg
 

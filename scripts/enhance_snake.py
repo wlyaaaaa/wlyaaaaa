@@ -14,9 +14,10 @@ import argparse
 import re
 from pathlib import Path
 from statistics import median
+from xml.sax.saxutils import escape
 
 
-MARKER = "growing-snake:v1"
+MARKER = "growing-snake:v2"
 
 
 def _css_block(source: str, declaration: re.Match[str]) -> str:
@@ -85,7 +86,12 @@ def _select_milestones(values: list[float], count: int) -> list[float]:
     return [values[round(index * last / (count - 1))] for index in range(count)]
 
 
-def enhance_svg(svg: str, *, max_segments: int = 10) -> str:
+def enhance_svg(
+    svg: str,
+    *,
+    max_segments: int = 10,
+    transition_text: str = "",
+) -> str:
     """Return *svg* with a contribution-driven growing tail.
 
     The added segments reuse the generated head route with a phase delay. Their
@@ -106,9 +112,6 @@ def enhance_svg(svg: str, *, max_segments: int = 10) -> str:
     duration_ms = int(duration_match.group(1))
 
     milestones = _consumption_milestones(svg)
-    if not milestones:
-        return svg
-
     snake_rects = list(
         re.finditer(r'<rect\s+class="s\s+s(\d+)"[^>]*/>', svg)
     )
@@ -118,50 +121,97 @@ def enhance_svg(svg: str, *, max_segments: int = 10) -> str:
     original_segments = max(int(match.group(1)) for match in snake_rects) + 1
     extra_count = max(0, max_segments - original_segments)
     selected = _select_milestones(milestones, extra_count)
-    if not selected:
+    if not selected and not transition_text:
         return svg
 
-    step_ms, reset = _snake_timing(svg, duration_ms)
-    tail_template = snake_rects[-1].group(0)
     styles: list[str] = [
         f"/* {MARKER}; original={original_segments}; max={max_segments} */",
-        ".sg{shape-rendering:geometricPrecision;fill:var(--cs);opacity:0}",
     ]
     rects: list[str] = []
+    transition_markup = ""
 
-    for offset, milestone in enumerate(selected):
-        segment = original_segments + offset
-        reveal = min(milestone + 0.02, reset - 0.03)
-        phase_delay = -(duration_ms - segment * step_ms)
+    if transition_text:
+        safe_text = escape(transition_text, {'"': "&quot;"})
         styles.extend(
             [
+                "@keyframes sg-transition-flow{to{stroke-dashoffset:-32}}",
                 (
-                    f"@keyframes sg-grow-{segment}"
-                    f"{{0%,{milestone:.2f}%{{opacity:0}}"
-                    f"{reveal:.2f}%,{reset - 0.02:.2f}%{{opacity:1}}"
-                    f"{reset:.2f}%,100%{{opacity:0}}}}"
+                    "@keyframes sg-transition-breathe{"
+                    "0%,100%{opacity:.55}50%{opacity:.95}}"
                 ),
                 (
-                    f".sg.sg{segment}{{animation-name:s0,sg-grow-{segment};"
-                    f"animation-duration:{duration_ms}ms,{duration_ms}ms;"
-                    f"animation-delay:{phase_delay}ms,0ms;"
-                    "animation-timing-function:linear,steps(1,end);"
-                    "animation-iteration-count:infinite,infinite}"
+                    ".sg-transition-line{fill:none;stroke:var(--cs);"
+                    "stroke-width:1;stroke-linecap:round;stroke-dasharray:2 6;"
+                    "opacity:.28;animation:sg-transition-flow 6s linear infinite}"
+                ),
+                (
+                    ".sg-transition-dot{fill:var(--cs);opacity:.55;"
+                    "animation:sg-transition-breathe 4s ease-in-out infinite}"
+                ),
+                (
+                    ".sg-transition-text{fill:var(--cs);"
+                    "font-family:'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif;"
+                    "font-size:11px;font-weight:600;letter-spacing:1.6px;"
+                    "text-anchor:middle;opacity:.72;"
+                    "animation:sg-transition-breathe 4s ease-in-out infinite}"
+                ),
+                (
+                    "@media (prefers-reduced-motion:reduce){"
+                    ".sg-transition-line,.sg-transition-dot,.sg-transition-text{"
+                    "animation:none}}"
                 ),
             ]
         )
+        transition_markup = (
+            f'<g class="sg-transition" aria-label="{safe_text}">'
+            '<line class="sg-transition-line" x1="126" y1="-14" x2="294" y2="-14"/>'
+            '<circle class="sg-transition-dot" cx="300" cy="-14" r="2.3"/>'
+            f'<text class="sg-transition-text" x="424" y="-10">{safe_text}</text>'
+            '<circle class="sg-transition-dot" cx="548" cy="-14" r="2.3"/>'
+            '<line class="sg-transition-line" x1="554" y1="-14" x2="722" y2="-14"/>'
+            "</g>"
+        )
 
-        tail = re.sub(
-            r'class="s\s+s\d+"',
-            f'class="sg sg{segment}"',
-            tail_template,
-            count=1,
+    if selected:
+        step_ms, reset = _snake_timing(svg, duration_ms)
+        tail_template = snake_rects[-1].group(0)
+        styles.append(
+            ".sg{shape-rendering:geometricPrecision;fill:var(--cs);opacity:0}"
         )
-        tail = tail[:-2] + (
-            f' data-growth-step="{offset + 1}"'
-            f' data-visible-after="{milestone:.2f}%"/>'
-        )
-        rects.append(tail)
+
+        for offset, milestone in enumerate(selected):
+            segment = original_segments + offset
+            reveal = min(milestone + 0.02, reset - 0.03)
+            phase_delay = -(duration_ms - segment * step_ms)
+            styles.extend(
+                [
+                    (
+                        f"@keyframes sg-grow-{segment}"
+                        f"{{0%,{milestone:.2f}%{{opacity:0}}"
+                        f"{reveal:.2f}%,{reset - 0.02:.2f}%{{opacity:1}}"
+                        f"{reset:.2f}%,100%{{opacity:0}}}}"
+                    ),
+                    (
+                        f".sg.sg{segment}{{animation-name:s0,sg-grow-{segment};"
+                        f"animation-duration:{duration_ms}ms,{duration_ms}ms;"
+                        f"animation-delay:{phase_delay}ms,0ms;"
+                        "animation-timing-function:linear,steps(1,end);"
+                        "animation-iteration-count:infinite,infinite}"
+                    ),
+                ]
+            )
+
+            tail = re.sub(
+                r'class="s\s+s\d+"',
+                f'class="sg sg{segment}"',
+                tail_template,
+                count=1,
+            )
+            tail = tail[:-2] + (
+                f' data-growth-step="{offset + 1}"'
+                f' data-visible-after="{milestone:.2f}%"/>'
+            )
+            rects.append(tail)
 
     style_payload = "".join(styles)
     if "</style>" not in svg:
@@ -169,7 +219,11 @@ def enhance_svg(svg: str, *, max_segments: int = 10) -> str:
     svg = svg.replace("</style>", style_payload + "</style>", 1)
 
     first_snake_rect = snake_rects[0].group(0)
-    return svg.replace(first_snake_rect, "".join(rects) + first_snake_rect, 1)
+    return svg.replace(
+        first_snake_rect,
+        transition_markup + "".join(rects) + first_snake_rect,
+        1,
+    )
 
 
 def main() -> int:
@@ -178,11 +232,20 @@ def main() -> int:
     )
     parser.add_argument("files", nargs="+", type=Path)
     parser.add_argument("--max-segments", type=int, default=10)
+    parser.add_argument(
+        "--transition-text",
+        default="",
+        help="Optional text displayed in the SVG's existing top breathing room.",
+    )
     args = parser.parse_args()
 
     for path in args.files:
         source = path.read_text(encoding="utf-8")
-        enhanced = enhance_svg(source, max_segments=args.max_segments)
+        enhanced = enhance_svg(
+            source,
+            max_segments=args.max_segments,
+            transition_text=args.transition_text,
+        )
         path.write_text(enhanced, encoding="utf-8", newline="")
         added = enhanced.count('class="sg sg')
         print(f"enhanced {path}: {added} growth segments")
