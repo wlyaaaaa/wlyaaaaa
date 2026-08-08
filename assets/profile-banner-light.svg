@@ -1,54 +1,47 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="340" viewBox="0 0 1200 340" role="img" aria-labelledby="title desc">
   <title id="title">吴乐阳的 GitHub 个人主页横幅</title>
-  <desc id="desc">吴乐阳，2001年08月29日出生，从 Java Backend 走向 LLM Application Engineering。</desc>
+  <desc id="desc">吴乐阳，2001年08月29日，Java Backend 转向 LLM Application Engineering。</desc>
   <defs>
-    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#E76F00"/>
-      <stop offset="0.52" stop-color="#F59E0B"/>
-      <stop offset="1" stop-color="#8B5CF6"/>
+    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#216E39"/>
+      <stop offset="1" stop-color="#2DA44E"/>
     </linearGradient>
-    <linearGradient id="soft" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#FFF7ED"/>
-      <stop offset="1" stop-color="#F5F3FF"/>
+    <linearGradient id="career" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#216E39"/>
+      <stop offset="1" stop-color="#2DA44E"/>
     </linearGradient>
-    <pattern id="grid" width="28" height="28" patternUnits="userSpaceOnUse">
-      <path d="M28 0H0V28" fill="none" stroke="#D8DEE4" stroke-width="1" opacity="0.55"/>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#DDE7E0" stroke-width="1" opacity="0.7"/>
     </pattern>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#8B5CF6" flood-opacity="0.14"/>
-    </filter>
+    <clipPath id="frame">
+      <rect x="1" y="1" width="1198" height="338" rx="28"/>
+    </clipPath>
   </defs>
 
-  <rect x="1" y="1" width="1198" height="338" rx="28" fill="#FFFFFF" stroke="#D0D7DE" stroke-width="2"/>
-  <rect x="1" y="1" width="1198" height="338" rx="28" fill="url(#grid)" opacity="0.52"/>
-  <path d="M0 260C185 211 330 326 518 269C705 212 810 52 1200 70V340H0Z" fill="url(#soft)" opacity="0.88"/>
-  <rect x="56" y="42" width="176" height="30" rx="15" fill="#FFF7ED" stroke="#FED7AA"/>
-  <circle cx="75" cy="57" r="5" fill="#E76F00"/>
-  <text x="91" y="62" fill="#9A3412" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="13" font-weight="600" letter-spacing="1.4">PROFILE / WLYAAAAA</text>
+  <g clip-path="url(#frame)">
+    <rect width="1200" height="340" fill="#FFFFFF"/>
+    <rect width="880" height="340" fill="url(#grid)" opacity="0.5"/>
+    <path d="M830 0H1200V340H700Z" fill="url(#panel)"/>
+    <path d="M792 0H826L696 340H662Z" fill="#9BE9A8" opacity="0.25"/>
 
-  <text x="58" y="166" fill="#1F2328" font-family="'Segoe UI','Microsoft YaHei','Noto Sans CJK SC',sans-serif" font-size="76" font-weight="700" letter-spacing="2">吴乐阳</text>
-  <text x="62" y="211" fill="#59636E" font-family="'Segoe UI','Microsoft YaHei','Noto Sans CJK SC',sans-serif" font-size="23">2001年08月29日出生</text>
-
-  <g filter="url(#shadow)">
-    <rect x="58" y="246" width="452" height="54" rx="14" fill="#FFFFFF" stroke="#D8DEE4"/>
-    <text x="82" y="280" fill="#E76F00" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="19" font-weight="700">Java Backend</text>
-    <path d="M240 273H303" stroke="url(#accent)" stroke-width="3" stroke-linecap="round"/>
-    <path d="m296 266 9 7-9 7" fill="none" stroke="#8B5CF6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="326" y="280" fill="#7C3AED" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="19" font-weight="700">LLM Application Engineering</text>
+    <text x="836" y="176" fill="#FFFFFF" font-family="'Segoe UI',Inter,Arial,sans-serif" font-size="100" font-weight="800" letter-spacing="8">WLY</text>
+    <path d="M838 205H1128" stroke="#FFFFFF" stroke-width="2" opacity="0.42"/>
+    <text x="838" y="238" fill="#FFFFFF" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="15" font-weight="600" letter-spacing="2.5" opacity="0.9">JAVA · LLM · SYSTEMS</text>
+    <text x="1090" y="302" fill="#FFFFFF" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="14" letter-spacing="2" opacity="0.62">01</text>
   </g>
 
-  <g transform="translate(745 50)" fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="170" cy="118" r="94" fill="#F5F3FF" stroke="#DDD6FE" stroke-width="2"/>
-    <path d="M82 135 145 85l58 31 70-67" stroke="url(#accent)" stroke-width="4"/>
-    <path d="M110 218 164 170l59 24 75-64" stroke="#C4B5FD" stroke-width="3"/>
-    <circle cx="82" cy="135" r="11" fill="#FFF7ED" stroke="#E76F00" stroke-width="4"/>
-    <circle cx="145" cy="85" r="11" fill="#FFFFFF" stroke="#F59E0B" stroke-width="4"/>
-    <circle cx="203" cy="116" r="12" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="4"/>
-    <circle cx="273" cy="49" r="11" fill="#F5F3FF" stroke="#7C3AED" stroke-width="4"/>
-    <circle cx="110" cy="218" r="8" fill="#FFFFFF" stroke="#FDBA74" stroke-width="3"/>
-    <circle cx="164" cy="170" r="8" fill="#FFFFFF" stroke="#A78BFA" stroke-width="3"/>
-    <circle cx="223" cy="194" r="8" fill="#FFFFFF" stroke="#8B5CF6" stroke-width="3"/>
-    <circle cx="298" cy="130" r="8" fill="#FFFFFF" stroke="#7C3AED" stroke-width="3"/>
-    <text x="135" y="132" fill="#1F2328" stroke="none" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="38" font-weight="700">{ AI }</text>
-  </g>
+  <rect x="1" y="1" width="1198" height="338" rx="28" fill="none" stroke="#D0D7DE" stroke-width="2"/>
+
+  <circle cx="60" cy="56" r="5" fill="#2DA44E"/>
+  <text x="77" y="61" fill="#216E39" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="13" font-weight="700" letter-spacing="1.6">WLYAAAAA / PROFILE</text>
+
+  <text x="58" y="164" fill="#17201A" font-family="'Segoe UI','Microsoft YaHei','Noto Sans CJK SC',sans-serif" font-size="76" font-weight="720" letter-spacing="2">吴乐阳</text>
+  <text x="62" y="209" fill="#57635A" font-family="'Segoe UI','Microsoft YaHei','Noto Sans CJK SC',sans-serif" font-size="23">2001年08月29日</text>
+
+  <path d="M58 246H681" stroke="#C7D8CB" stroke-width="2"/>
+  <path d="M58 246H196" stroke="url(#career)" stroke-width="4"/>
+  <text x="58" y="286" fill="#216E39" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="19" font-weight="700">Java Backend</text>
+  <path d="M232 278H309" stroke="url(#career)" stroke-width="3" stroke-linecap="round"/>
+  <path d="m301 270 10 8-10 8" fill="none" stroke="#2DA44E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="338" y="286" fill="#238636" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="19" font-weight="700">LLM Application Engineering</text>
 </svg>

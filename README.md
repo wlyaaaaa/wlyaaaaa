@@ -2,7 +2,7 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-banner-dark.svg">
     <source media="(prefers-color-scheme: light)" srcset="./assets/profile-banner-light.svg">
-    <img alt="吴乐阳，2001年08月29日出生，Java Backend 转向 LLM Application Engineering" src="./assets/profile-banner-light.svg" width="100%">
+    <img alt="吴乐阳，2001年08月29日，Java Backend 转向 LLM Application Engineering" src="./assets/profile-banner-light.svg" width="100%">
   </picture>
 </p>
 
@@ -52,11 +52,11 @@
 #### AI Application Engineering
 
 <p>
-  <img src="https://img.shields.io/badge/LLM_API-8B5CF6?style=for-the-badge" alt="LLM API">
-  <img src="https://img.shields.io/badge/RAG-7C3AED?style=for-the-badge" alt="RAG">
-  <img src="https://img.shields.io/badge/AI_Agents-6D28D9?style=for-the-badge" alt="AI Agents">
-  <img src="https://img.shields.io/badge/MCP-4F46E5?style=for-the-badge" alt="MCP">
-  <img src="https://img.shields.io/badge/Local_AI-0F766E?style=for-the-badge" alt="Local AI">
+  <img src="https://img.shields.io/badge/LLM_API-16A34A?style=for-the-badge" alt="LLM API">
+  <img src="https://img.shields.io/badge/RAG-15803D?style=for-the-badge" alt="RAG">
+  <img src="https://img.shields.io/badge/AI_Agents-047857?style=for-the-badge" alt="AI Agents">
+  <img src="https://img.shields.io/badge/MCP-0F766E?style=for-the-badge" alt="MCP">
+  <img src="https://img.shields.io/badge/Local_AI-115E59?style=for-the-badge" alt="Local AI">
 </p>
 
 #### Engineering
