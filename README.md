@@ -18,6 +18,8 @@
 
 ### 🧑‍💻 关于我
 
+- 💡 我更在意想法本身，以及它最后有没有真的被做出来
+- 💬 产品、技术，或者一个还没成形的点子，都可以找我聊
 - 📫 常用邮箱：**[wlyaaaaaa@gmail.com](mailto:wlyaaaaaa@gmail.com)**
 - 🏢 个人企业邮箱：**[hello@wly0829.cn](mailto:hello@wly0829.cn)**
 - 🌐 个人网站：**[wly0829.cn](https://wly0829.cn)**
