@@ -18,11 +18,11 @@
 
 ### 🧑‍💻 关于我
 
-- ☕ Java 后端背景，熟悉 **Spring Boot、MySQL、Redis、Kafka、MQ、Elasticsearch**
-- 🤖 目前专注 **AI 大模型应用工程**，把模型能力接入真实业务与个人工作流
-- 💡 我相信 **AI 时代，创意比技术更重要**
-- 🌱 正在深入研究 **AI Agent、RAG、MCP、本地多模态 AI**
-- 💬 可以找我聊聊 **产品与技术建议**
+- ☕ 从 Java 后端走来，做过基于 **Spring Boot、MySQL、Redis、Kafka 与 Elasticsearch** 的服务端开发
+- 🤖 现在主要做 **AI 大模型应用工程**，把模型接进本地数据、工具与真实工作流
+- 🧩 最近在完善 **WeChat History AI Bridge、ChineseASR 与 LocalOCR**
+- 💡 比起追逐模型名，我更关心一个想法能不能真正做出来、稳定跑下去
+- 💬 欢迎交流 **产品想法、技术方案与工程落地**
 - 📫 常用邮箱：**[wlyaaaaaa@gmail.com](mailto:wlyaaaaaa@gmail.com)**
 - 🏢 个人企业邮箱：**[hello@wly0829.cn](mailto:hello@wly0829.cn)**
 - 🌐 个人网站：**[wly0829.cn](https://wly0829.cn)**
