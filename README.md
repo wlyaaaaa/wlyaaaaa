@@ -16,15 +16,7 @@
 
 ---
 
-### 👋 关于我
-
-以前写 Java，现在主要做 AI 相关的东西。
-
-**[hello@wly0829.cn](mailto:hello@wly0829.cn)** · **[wly0829.cn](https://wly0829.cn)**
-
----
-
-### 🧰 最近做的东西
+### 项目
 
 <!-- FEATURED_PROJECTS:START -->
 <!-- CUSTOMIZE: 替换项目时，同时更新 href、alt 与对应的 assets/project-*.svg；布局无需改动。 -->
