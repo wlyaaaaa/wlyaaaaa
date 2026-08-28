@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="340" viewBox="0 0 1200 340" role="img" aria-labelledby="title desc">
   <title id="title">吴乐阳的 GitHub 个人主页横幅</title>
-  <desc id="desc">吴乐阳，2001年08月29日，Java Backend 转向 LLM Application Engineering，右侧为缓慢呼吸的绿色 AI 核心。</desc>
+  <desc id="desc">吴乐阳，会判断 AI 产品该做什么，也会把 AI 应用做出来，以 Java 企业系统为工程底座；右侧为缓慢呼吸的绿色 AI 核心。</desc>
   <defs>
     <linearGradient id="career" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#39D353"/>
@@ -69,18 +69,19 @@
 
   <!-- CUSTOMIZE: identity -->
   <circle cx="60" cy="56" r="5" fill="#39D353"/>
-  <text x="77" y="61" fill="#7EE787" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="13" font-weight="700" letter-spacing="1.6">WLYAAAAA / PROFILE</text>
+  <text x="77" y="61" fill="#7EE787" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="13" font-weight="700" letter-spacing="1.35">AI PRODUCT × APPLICATION ENGINEERING</text>
 
   <text x="58" y="164" fill="#F0F6FC" font-family="'Segoe UI','Microsoft YaHei','Noto Sans CJK SC',sans-serif" font-size="76" font-weight="720" letter-spacing="2">吴乐阳</text>
-  <text x="62" y="209" fill="#9BA7B4" font-family="'Segoe UI','Microsoft YaHei','Noto Sans CJK SC',sans-serif" font-size="23">2001年08月29日</text>
+  <text x="62" y="209" fill="#9BA7B4" font-family="'Segoe UI','Microsoft YaHei','Noto Sans CJK SC',sans-serif" font-size="23">把 AI 想法判断清楚，也把应用真正做出来</text>
 
-  <!-- CUSTOMIZE: career path -->
+  <!-- CUSTOMIZE: capability signature -->
   <path d="M58 246H681" stroke="#244D32" stroke-width="2"/>
-  <path d="M58 246H196" stroke="url(#career)" stroke-width="4"/>
-  <text x="58" y="286" fill="#7EE787" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="19" font-weight="700">Java Backend</text>
-  <path d="M232 278H309" stroke="url(#career)" stroke-width="3" stroke-linecap="round"/>
-  <path d="m301 270 10 8-10 8" fill="none" stroke="#3FB950" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="338" y="286" fill="#56D364" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="19" font-weight="700">LLM Application Engineering</text>
+  <path d="M58 246H184" stroke="url(#career)" stroke-width="4"/>
+  <text x="58" y="286" fill="#7EE787" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="17" font-weight="700">JAVA / SPRING</text>
+  <circle cx="210" cy="280" r="3" fill="#39D353"/>
+  <text x="232" y="286" fill="#56D364" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="17" font-weight="700">AGENT / RAG / EVAL</text>
+  <circle cx="448" cy="280" r="3" fill="#39D353"/>
+  <text x="470" y="286" fill="#7EE787" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="17" font-weight="700">SYSTEM INTEGRATION</text>
 
   <!-- REUSABLE: animated AI bloom -->
   <g transform="translate(970 144)">
@@ -107,5 +108,5 @@
     <polygon points="0,-22 19,-11 19,11 0,22 -19,11 -19,-11" fill="url(#core)"/>
     <circle r="7" fill="#F0F6FC" opacity="0.94"/>
   </g>
-  <text x="970" y="274" text-anchor="middle" fill="#7EE787" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="13" font-weight="700" letter-spacing="2.1">AI APPLICATION ENGINEERING</text>
+  <text x="970" y="274" text-anchor="middle" fill="#7EE787" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="13" font-weight="700" letter-spacing="2.1">IDEA TO WORKING SYSTEM</text>
 </svg>

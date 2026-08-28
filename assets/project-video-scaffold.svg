@@ -1,7 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="560" height="180" viewBox="0 0 560 180" role="img" aria-labelledby="title desc">
-  <title id="title">llm-backend-toolkit</title>
-  <desc id="desc">为顶层 AI 模型提供异步、上下文高效的后端能力。</desc>
-  <!-- CUSTOMIZE: title, desc, visible name, summary, tags and decoration; keep the 560 x 180 viewBox. -->
+  <title id="title">video-scaffold</title>
+  <desc id="desc">把脚本、TTS、词级时间轴、SVG 动画和 4K 合成串成一条本地视频流水线。</desc>
   <defs>
     <linearGradient id="accent" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#30A14E"/>
@@ -14,14 +13,14 @@
     .name { fill: #17201A; }
     .summary { fill: #52605A; }
     .tag { fill: #EAF6ED; stroke: #CDEBD5; }
-    .code { fill: none; stroke: #9BE9A8; opacity: 0.5; }
+    .film { fill: none; stroke: #9BE9A8; opacity: 0.52; }
     @media (prefers-color-scheme: dark) {
       .card { fill: #0F1712; stroke: #244D32; }
       .eyebrow, .arrow, .tag-text { fill: #7EE787; }
       .name { fill: #F0F6FC; }
       .summary { fill: #A8B3AB; }
       .tag { fill: #13271A; stroke: #245C35; }
-      .code { stroke: #26A641; opacity: 0.36; }
+      .film { stroke: #26A641; opacity: 0.38; }
     }
   </style>
   <rect class="card" x="1" y="1" width="558" height="178" rx="20" stroke-width="2"/>
@@ -29,15 +28,16 @@
   <circle cx="30" cy="29" r="4" fill="#2DA44E"/>
   <text class="eyebrow" x="43" y="34" font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="12" font-weight="700" letter-spacing="1.7">FEATURED / 04</text>
   <text class="arrow" x="512" y="49" font-family="'Segoe UI Symbol','Segoe UI',sans-serif" font-size="27" font-weight="600">↗</text>
-  <path class="code" d="m462 116-15 16 15 16M506 116l15 16-15 16M489 108l-10 48" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-  <text class="name" x="28" y="77" font-family="'Segoe UI',Inter,Arial,sans-serif" font-size="25" font-weight="700">llm-backend-toolkit</text>
-  <text class="summary" x="28" y="108" font-family="'Segoe UI','Microsoft YaHei',sans-serif" font-size="16">异步 · 上下文高效 · 模型后端工具链</text>
+  <path class="film" d="M453 111h68v48h-68zM453 122h68M453 148h68M465 111v11M483 111v11M501 111v11M465 148v11M483 148v11M501 148v11" stroke-width="2.5" stroke-linecap="round"/>
+  <path class="film" d="m480 128 14 7-14 7z" stroke-width="2.5" stroke-linejoin="round"/>
+  <text class="name" x="28" y="77" font-family="'Segoe UI',Inter,Arial,sans-serif" font-size="25" font-weight="700">video-scaffold</text>
+  <text class="summary" x="28" y="108" font-family="'Segoe UI','Microsoft YaHei',sans-serif" font-size="16">脚本 · TTS · 时间轴 · SVG · 本地 4K 合成</text>
   <g font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="13" font-weight="600">
-    <rect class="tag" x="28" y="130" width="56" height="28" rx="14"/>
-    <text class="tag-text" x="43" y="149">LLM</text>
-    <rect class="tag" x="92" y="130" width="68" height="28" rx="14"/>
-    <text class="tag-text" x="108" y="149">Async</text>
-    <rect class="tag" x="168" y="130" width="82" height="28" rx="14"/>
-    <text class="tag-text" x="182" y="149">Tooling</text>
+    <rect class="tag" x="28" y="130" width="72" height="28" rx="14"/>
+    <text class="tag-text" x="45" y="149">Python</text>
+    <rect class="tag" x="108" y="130" width="56" height="28" rx="14"/>
+    <text class="tag-text" x="124" y="149">TTS</text>
+    <rect class="tag" x="172" y="130" width="72" height="28" rx="14"/>
+    <text class="tag-text" x="190" y="149">FFmpeg</text>
   </g>
 </svg>

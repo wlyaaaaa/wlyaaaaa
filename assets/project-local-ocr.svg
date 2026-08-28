@@ -31,13 +31,13 @@
   <text class="arrow" x="512" y="49" font-family="'Segoe UI Symbol','Segoe UI',sans-serif" font-size="27" font-weight="600">↗</text>
   <path class="scan" d="M455 113v-13h13M515 113v-13h-13M455 151v13h13M515 151v13h-13M465 132h40" stroke-width="3" stroke-linecap="round"/>
   <text class="name" x="28" y="77" font-family="'Segoe UI',Inter,Arial,sans-serif" font-size="25" font-weight="700">LocalOCR</text>
-  <text class="summary" x="28" y="108" font-family="'Segoe UI','Microsoft YaHei',sans-serif" font-size="16">中文文档与截图 · 本地 GPU OCR</text>
+  <text class="summary" x="28" y="108" font-family="'Segoe UI','Microsoft YaHei',sans-serif" font-size="16">中文截图与扫描件 · OCR / VL 分流</text>
   <g font-family="ui-monospace, SFMono-Regular, Consolas, monospace" font-size="13" font-weight="600">
     <rect class="tag" x="28" y="130" width="56" height="28" rx="14"/>
     <text class="tag-text" x="44" y="149">OCR</text>
     <rect class="tag" x="92" y="130" width="72" height="28" rx="14"/>
     <text class="tag-text" x="109" y="149">Python</text>
-    <rect class="tag" x="172" y="130" width="94" height="28" rx="14"/>
-    <text class="tag-text" x="188" y="149">Local AI</text>
+    <rect class="tag" x="172" y="130" width="88" height="28" rx="14"/>
+    <text class="tag-text" x="189" y="149">Layout</text>
   </g>
 </svg>

@@ -1,8 +1,8 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-banner-dark.svg?v=ai-bloom-1">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/profile-banner-light.svg?v=ai-bloom-1">
-    <img alt="吴乐阳，2001年08月29日，Java Backend 转向 LLM Application Engineering" src="./assets/profile-banner-light.svg?v=ai-bloom-1" width="100%">
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-banner-dark.svg?v=profile-20260828-1">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/profile-banner-light.svg?v=profile-20260828-1">
+    <img alt="吴乐阳：会判断 AI 产品该做什么，也会把 AI 应用做出来；Java 企业系统是工程底座" src="./assets/profile-banner-light.svg?v=profile-20260828-1" width="100%">
   </picture>
 </p>
 
@@ -16,69 +16,37 @@
 
 ---
 
-### 🧑‍💻 关于我
+### 👋 我在做什么
 
-- 💡 我更在意想法本身，以及它最后有没有真的被做出来
-- 💬 产品、技术，或者一个还没成形的点子，都可以找我聊
-- 📫 常用邮箱：**[wlyaaaaaa@gmail.com](mailto:wlyaaaaaa@gmail.com)**
-- 🏢 个人企业邮箱：**[hello@wly0829.cn](mailto:hello@wly0829.cn)**
-- 🌐 个人网站：**[wly0829.cn](https://wly0829.cn)**
+我一边琢磨 **AI 产品该解决什么问题**，一边把应用做出来。Java 企业系统是工程底座；现在主要关注 Agent、RAG、评测，以及 AI 与现有系统的集成。
 
----
+我更在意想法本身，以及它最后有没有真的被做出来。产品、技术，或者一个还没成形的点子，都可以找我聊。
 
-### 🛠️ 核心技术栈
-
-#### Languages & Backend
-
-<p>
-  <img src="https://img.shields.io/badge/Java-E76F00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java">
-  <img src="https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white" alt="Spring Boot">
-  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/REST_API-475569?style=for-the-badge" alt="REST API">
-  <img src="https://img.shields.io/badge/OpenAPI-6BA539?style=for-the-badge&logo=openapiinitiative&logoColor=white" alt="OpenAPI">
-</p>
-
-#### Data & Middleware
-
-<p>
-  <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL">
-  <img src="https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white" alt="Redis">
-  <img src="https://img.shields.io/badge/Apache_Kafka-231F20?style=for-the-badge&logo=apachekafka&logoColor=white" alt="Apache Kafka">
-  <img src="https://img.shields.io/badge/Message_Queue-64748B?style=for-the-badge" alt="Message Queue">
-  <img src="https://img.shields.io/badge/Elasticsearch-005571?style=for-the-badge&logo=elasticsearch&logoColor=white" alt="Elasticsearch">
-</p>
-
-#### AI Application Engineering
-
-<p>
-  <img src="https://img.shields.io/badge/LLM_API-16A34A?style=for-the-badge" alt="LLM API">
-  <img src="https://img.shields.io/badge/RAG-15803D?style=for-the-badge" alt="RAG">
-  <img src="https://img.shields.io/badge/AI_Agents-047857?style=for-the-badge" alt="AI Agents">
-  <img src="https://img.shields.io/badge/MCP-0F766E?style=for-the-badge" alt="MCP">
-  <img src="https://img.shields.io/badge/Local_AI-115E59?style=for-the-badge" alt="Local AI">
-</p>
-
-#### Engineering
-
-<p>
-  <img src="https://img.shields.io/badge/PowerShell-5391FE?style=for-the-badge&logo=powershell&logoColor=white" alt="PowerShell">
-  <img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=githubactions&logoColor=white" alt="GitHub Actions">
-  <img src="https://img.shields.io/badge/Windows_Automation-0078D4?style=for-the-badge&logo=windows11&logoColor=white" alt="Windows Automation">
-</p>
+**[hello@wly0829.cn](mailto:hello@wly0829.cn)** · **[wly0829.cn](https://wly0829.cn)**
 
 ---
 
-### 🚀 精选项目
+### 🔎 关注方向
+
+|  |  |
+| --- | --- |
+| **产品判断** | 先看问题值不值得用 AI，再谈模型和方案 |
+| **应用研发** | Agent、RAG、评测，以及把 AI 能力接进已有系统 |
+| **工程底座** | Java / Spring Boot 企业系统；Python、PowerShell 与 Windows 工具链 |
+
+---
+
+### 🚀 精选公开项目
 
 <!-- FEATURED_PROJECTS:START -->
 <!-- CUSTOMIZE: 替换项目时，同时更新 href、alt 与对应的 assets/project-*.svg；布局无需改动。 -->
 <p align="center">
-  <a href="https://github.com/wlyaaaaa/wechat-history-ai-bridge"><img src="./assets/project-wechat-history-ai-bridge.svg?v=1" alt="WeChat History AI Bridge：本地微信能力到 AI Agent 安全接口" width="49%"></a>
-  <a href="https://github.com/wlyaaaaa/ChineseASR"><img src="./assets/project-chinese-asr.svg?v=1" alt="ChineseASR：本地优先的中文语音识别与审核流程" width="49%"></a>
+  <a href="https://github.com/wlyaaaaa/ChineseASR"><img src="./assets/project-chinese-asr.svg?v=3" alt="ChineseASR：本地把中文录音转成可复核文本，并保留双模型分歧与证据" width="49%"></a>
+  <a href="https://github.com/wlyaaaaa/ai-cli-profile-manager"><img src="./assets/project-ai-cli-profile-manager.svg?v=2" alt="AI CLI Profile Manager：把多套 AI CLI 的 Profile、模型、启动和体检收进一个 Windows 入口" width="49%"></a>
 </p>
 <p align="center">
-  <a href="https://github.com/wlyaaaaa/LocalOCR"><img src="./assets/project-local-ocr.svg?v=1" alt="LocalOCR：中文文档与截图的本地 GPU OCR" width="49%"></a>
-  <a href="https://github.com/wlyaaaaa/llm-backend-toolkit"><img src="./assets/project-llm-backend-toolkit.svg?v=1" alt="llm-backend-toolkit：异步且上下文高效的模型后端工具链" width="49%"></a>
+  <a href="https://github.com/wlyaaaaa/LocalOCR"><img src="./assets/project-local-ocr.svg?v=3" alt="LocalOCR：本地对中文截图与扫描件做 OCR、VL 和结构化分流" width="49%"></a>
+  <a href="https://github.com/wlyaaaaa/video-scaffold"><img src="./assets/project-video-scaffold.svg?v=1" alt="video-scaffold：把脚本、TTS、词级时间轴、SVG 动画和 4K 合成串成本地视频流水线" width="49%"></a>
 </p>
 <!-- FEATURED_PROJECTS:END -->
 
