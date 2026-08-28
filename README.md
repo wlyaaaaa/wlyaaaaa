@@ -1,8 +1,8 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-banner-dark.svg?v=profile-20260828-3">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/profile-banner-light.svg?v=profile-20260828-3">
-    <img alt="吴乐阳的 GitHub 个人主页：想到什么，就做点什么" src="./assets/profile-banner-light.svg?v=profile-20260828-3" width="100%">
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-banner-dark.svg?v=profile-20260828-4">
+    <source media="(prefers-color-scheme: light)" srcset="./assets/profile-banner-light.svg?v=profile-20260828-4">
+    <img alt="吴乐阳的 GitHub 个人主页横幅" src="./assets/profile-banner-light.svg?v=profile-20260828-4" width="100%">
   </picture>
 </p>
 
@@ -18,9 +18,7 @@
 
 ### 👋 关于我
 
-写过 Java，最近主要折腾 AI。
-
-这里的东西大多是因为我自己想用，后来就一路改下去了。
+以前写 Java，现在主要做 AI 相关的东西。
 
 **[hello@wly0829.cn](mailto:hello@wly0829.cn)** · **[wly0829.cn](https://wly0829.cn)**
 

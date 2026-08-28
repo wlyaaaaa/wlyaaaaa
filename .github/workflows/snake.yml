@@ -37,7 +37,6 @@ jobs:
         run: |
           python3 scripts/enhance_snake.py \
             --max-segments 10 \
-            --transition-text "写点代码 · 做点工具" \
             dist/github-contribution-grid-snake.svg \
             dist/github-contribution-grid-snake-dark.svg
 
