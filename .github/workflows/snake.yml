@@ -9,6 +9,8 @@ on:
       - main
     paths:
       - ".github/workflows/snake.yml"
+      - "scripts/enhance_snake.py"
+      - "tests/test_enhance_snake.py"
 
 permissions:
   contents: write
@@ -24,6 +26,9 @@ jobs:
     steps:
       - name: Check out growth enhancer
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: Test growth enhancer
+        run: python3 -m unittest discover -s tests -v
 
       - name: Generate light and dark contribution snakes
         uses: Platane/snk/svg-only@d8f6715049803e982ee5ff501b6b9b7d5deeb09b # v3
