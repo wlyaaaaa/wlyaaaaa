@@ -1,10 +1,24 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-banner-dark.svg?v=profile-20260828-4">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/profile-banner-light.svg?v=profile-20260828-4">
-    <img alt="吴乐阳的 GitHub 个人主页横幅" src="./assets/profile-banner-light.svg?v=profile-20260828-4" width="100%">
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-banner-dark.webp">
+    <img alt="吴乐阳的绿色全景书桌：录音、识字、模型任务、电脑状态与视频制作" src="./assets/profile-banner-light.webp" width="100%">
   </picture>
 </p>
+
+### 项目
+
+这里放我日常使用和折腾的小项目：中文录音转写、图片识字、模型任务，还有机箱屏和视频制作。
+
+<!-- FEATURED_PROJECTS:START -->
+<p align="center">
+  <a href="https://github.com/wlyaaaaa/ChineseASR"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/project-chinese-asr-dark.svg"><img src="./assets/project-chinese-asr.svg" alt="ChineseASR：本地中文录音转写与桌面听写" width="390"></picture></a>
+  <a href="https://github.com/wlyaaaaa/LocalOCR"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/project-local-ocr-dark.svg"><img src="./assets/project-local-ocr.svg" alt="LocalOCR：本地识别图片和扫描件里的字" width="390"></picture></a>
+  <a href="https://github.com/wlyaaaaa/llm-backend-toolkit"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/project-llm-backend-toolkit-dark.svg"><img src="./assets/project-llm-backend-toolkit.svg" alt="llm-backend-toolkit：把模型调用变成能查进度的任务" width="390"></picture></a>
+  <a href="https://github.com/wlyaaaaa/ai-cli-profile-manager"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/project-ai-cli-profile-manager-dark.svg"><img src="./assets/project-ai-cli-profile-manager.svg" alt="ai-cli-profile-manager：一个入口管好几套 AI 命令行" width="390"></picture></a>
+  <a href="https://github.com/wlyaaaaa/PC-Panel-Hub"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/project-pc-panel-hub-dark.svg"><img src="./assets/project-pc-panel-hub.svg" alt="PC-Panel-Hub：机箱小屏和曲面屏上的电脑状态" width="390"></picture></a>
+  <a href="https://github.com/wlyaaaaa/video-scaffold"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/project-video-scaffold-dark.svg"><img src="./assets/project-video-scaffold.svg" alt="video-scaffold：从文案到成片的本地视频流水线" width="390"></picture></a>
+</p>
+<!-- FEATURED_PROJECTS:END -->
 
 <p align="center">
   <picture>
@@ -13,21 +27,3 @@
     <img alt="吴乐阳的 GitHub 贡献记录" src="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake.svg?v=growing-snake-2" width="100%">
   </picture>
 </p>
-
----
-
-### 项目
-
-这里放我日常使用和折腾的小项目：中文录音转写、图片识字、模型任务，还有机箱屏和视频制作。
-
-<!-- FEATURED_PROJECTS:START -->
-<!-- CUSTOMIZE: 替换项目时，同时更新 href、alt 与对应的 assets/project-*.svg；布局无需改动。 -->
-<p align="center">
-  <a href="https://github.com/wlyaaaaa/ChineseASR"><img src="./assets/project-chinese-asr.svg?v=3" alt="ChineseASR：本地把中文录音转成可复核文本，并保留双模型分歧与证据" width="49%"></a>
-  <a href="https://github.com/wlyaaaaa/ai-cli-profile-manager"><img src="./assets/project-ai-cli-profile-manager.svg?v=2" alt="AI CLI Profile Manager：把多套 AI CLI 的 Profile、模型、启动和体检收进一个 Windows 入口" width="49%"></a>
-</p>
-<p align="center">
-  <a href="https://github.com/wlyaaaaa/LocalOCR"><img src="./assets/project-local-ocr.svg?v=3" alt="LocalOCR：本地对中文截图与扫描件做 OCR、VL 和结构化分流" width="49%"></a>
-  <a href="https://github.com/wlyaaaaa/video-scaffold"><img src="./assets/project-video-scaffold.svg?v=1" alt="video-scaffold：把脚本、TTS、词级时间轴、SVG 动画和 4K 合成串成本地视频流水线" width="49%"></a>
-</p>
-<!-- FEATURED_PROJECTS:END -->
