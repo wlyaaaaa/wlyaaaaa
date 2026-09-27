@@ -18,6 +18,8 @@
 
 ### 项目
 
+这里放我日常使用和折腾的小项目：中文录音转写、图片识字、模型任务，还有机箱屏和视频制作。
+
 <!-- FEATURED_PROJECTS:START -->
 <!-- CUSTOMIZE: 替换项目时，同时更新 href、alt 与对应的 assets/project-*.svg；布局无需改动。 -->
 <p align="center">
