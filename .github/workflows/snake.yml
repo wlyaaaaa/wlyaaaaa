@@ -35,8 +35,8 @@ jobs:
         with:
           github_user_name: ${{ github.repository_owner }}
           outputs: |
-            dist/github-contribution-grid-snake.svg?color_snake=#216E39&color_dots=#EBEDF0,#9BE9A8,#40C463,#30A14E,#216E39
-            dist/github-contribution-grid-snake-dark.svg?color_snake=#39D353&color_dots=#161B22,#0E4429,#006D32,#26A641,#39D353
+            dist/github-contribution-grid-snake.svg?color_snake=#b77942&color_dots=#eef3ed,#dff2e5,#91d3aa,#16a34a,#107c38
+            dist/github-contribution-grid-snake-dark.svg?color_snake=#d9ad73&color_dots=#25332b,#244d35,#107c38,#16a34a,#82d5a0
 
       - name: Grow the snake as contribution cells are eaten
         run: |

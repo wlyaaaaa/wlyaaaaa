@@ -4,7 +4,8 @@
 The upstream generator intentionally renders a four-segment snake. This small,
 dependency-free post-processor keeps its contribution data and route intact,
 then adds tail segments that become visible exactly when contribution cells are
-eaten. Change the workflow's ``--max-segments`` value when a shorter or longer
+eaten and rounds the contribution tiles to match the profile cards.
+Change the workflow's ``--max-segments`` value when a shorter or longer
 tail is preferred later.
 """
 
@@ -226,6 +227,30 @@ def enhance_svg(
     )
 
 
+def round_cells(svg: str) -> str:
+    """Soften contribution tiles without changing their data or animation."""
+
+    def rounded(match: re.Match[str]) -> str:
+        rect = match.group(0)
+        classes = re.search(r'''\sclass=(["'])(.*?)\1''', rect)
+        if not classes or "c" not in classes.group(2).split():
+            return rect
+
+        for attribute in ("rx", "ry"):
+            pattern = rf'''\s{attribute}=(["']).*?\1'''
+            if re.search(pattern, rect):
+                rect = re.sub(pattern, f' {attribute}="3"', rect)
+            else:
+                rect = re.sub(
+                    r"\s*/?>$",
+                    lambda end: f' {attribute}="3"{end.group(0)}',
+                    rect,
+                )
+        return rect
+
+    return re.sub(r"<rect\b[^>]*>", rounded, svg)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(
         description="Add contribution-driven growth to Platane/snk SVG files."
@@ -246,6 +271,7 @@ def main() -> int:
             max_segments=args.max_segments,
             transition_text=args.transition_text,
         )
+        enhanced = round_cells(enhanced)
         path.write_text(enhanced, encoding="utf-8", newline="")
         added = enhanced.count('class="sg sg')
         print(f"enhanced {path}: {added} growth segments")

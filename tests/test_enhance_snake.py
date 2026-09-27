@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 import unittest
+import xml.etree.ElementTree as ET
 
-from scripts.enhance_snake import enhance_svg
+from scripts.enhance_snake import enhance_svg, round_cells
 
 
 SAMPLE_SVG = """<svg xmlns="http://www.w3.org/2000/svg">
@@ -86,6 +87,47 @@ class EnhanceSnakeTests(unittest.TestCase):
     def test_rejects_an_svg_without_the_snake_animation(self) -> None:
         with self.assertRaisesRegex(ValueError, "snake animation duration"):
             enhance_svg("<svg><style></style></svg>", max_segments=10)
+
+
+class RoundCellsTests(unittest.TestCase):
+    def test_rounds_only_contribution_tiles_and_keeps_their_data(self) -> None:
+        source = (
+            '<svg><rect class="c c7" x="18" y="34" rx="2" ry="2" '
+            'data-level="4" data-rx="9"/>'
+            '<rect class="s s0" rx="4.5"/><rect class="sg sg4"/>'
+            '<rect class="chart"/></svg>'
+        )
+        result = ET.fromstring(round_cells(source))
+        cell = result[0]
+        self.assertEqual("3", cell.get("rx"))
+        self.assertEqual("3", cell.get("ry"))
+        self.assertEqual("18", cell.get("x"))
+        self.assertEqual("34", cell.get("y"))
+        self.assertEqual("4", cell.get("data-level"))
+        self.assertEqual("9", cell.get("data-rx"))
+        self.assertEqual("4.5", result[1].get("rx"))
+        self.assertIsNone(result[2].get("rx"))
+        self.assertIsNone(result[3].get("rx"))
+
+    def test_adds_missing_radii_and_is_idempotent(self) -> None:
+        source = "<svg><rect class='c'/><rect class='c ca' rx='1'></rect></svg>"
+        once = round_cells(source)
+        self.assertEqual(once, round_cells(once))
+        for cell in ET.fromstring(once):
+            self.assertEqual("3", cell.get("rx"))
+            self.assertEqual("3", cell.get("ry"))
+
+    def test_rounding_an_existing_growing_snake_preserves_growth(self) -> None:
+        grown = enhance_svg(
+            SAMPLE_SVG.replace('</svg>', '<rect class="c" rx="2" ry="2"/></svg>')
+        )
+        rounded = round_cells(grown)
+        self.assertEqual(
+            grown.replace('class="c" rx="2" ry="2"', 'class="c" rx="3" ry="3"'),
+            rounded,
+        )
+        self.assertEqual(6, rounded.count('class="sg sg'))
+        self.assertEqual(rounded, round_cells(enhance_svg(rounded)))
 
 
 if __name__ == "__main__":
