@@ -7,13 +7,13 @@
 
 ### 项目
 
-这里放我日常使用和折腾的小项目：中文录音转写、图片识字、模型任务，还有机箱屏和视频制作。
+这里放我日常使用和折腾的小项目：中文录音转写、图片识字、电脑使用记录，还有机箱屏和视频制作。
 
 <!-- FEATURED_PROJECTS:START -->
 <p align="center">
   <a href="https://github.com/wlyaaaaa/ChineseASR"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/project-chinese-asr-dark.svg"><img src="./assets/project-chinese-asr.svg" alt="ChineseASR：本地中文录音转写与桌面听写" width="390"></picture></a>
   <a href="https://github.com/wlyaaaaa/LocalOCR"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/project-local-ocr-dark.svg"><img src="./assets/project-local-ocr.svg" alt="LocalOCR：本地识别图片和扫描件里的字" width="390"></picture></a>
-  <a href="https://github.com/wlyaaaaa/llm-backend-toolkit"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/project-llm-backend-toolkit-dark.svg"><img src="./assets/project-llm-backend-toolkit.svg" alt="llm-backend-toolkit：把模型调用变成能查进度的任务" width="390"></picture></a>
+  <a href="https://github.com/wlyaaaaa/TimeAudit"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/project-timeaudit-dark.svg"><img src="./assets/project-timeaudit.svg" alt="TimeAudit：回看电脑的使用时间和卡顿原因" width="390"></picture></a>
   <a href="https://github.com/wlyaaaaa/ai-cli-profile-manager"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/project-ai-cli-profile-manager-dark.svg"><img src="./assets/project-ai-cli-profile-manager.svg" alt="ai-cli-profile-manager：一个入口管好几套 AI 命令行" width="390"></picture></a>
   <a href="https://github.com/wlyaaaaa/PC-Panel-Hub"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/project-pc-panel-hub-dark.svg"><img src="./assets/project-pc-panel-hub.svg" alt="PC-Panel-Hub：机箱小屏和曲面屏上的电脑状态" width="390"></picture></a>
   <a href="https://github.com/wlyaaaaa/video-scaffold"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/project-video-scaffold-dark.svg"><img src="./assets/project-video-scaffold.svg" alt="video-scaffold：从文案到成片的本地视频流水线" width="390"></picture></a>
