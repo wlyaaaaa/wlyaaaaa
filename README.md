@@ -1,7 +1,7 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-banner-dark.webp">
-    <img alt="吴乐阳的绿色全景书桌：录音、识字、模型任务、电脑状态与视频制作" src="./assets/profile-banner-light.webp" width="100%">
+    <img alt="吴乐阳的绿色全景书桌：录音、识字、电脑使用记录、电脑状态与视频制作" src="./assets/profile-banner-light.webp" width="100%">
   </picture>
 </p>
 
