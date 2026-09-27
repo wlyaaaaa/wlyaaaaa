@@ -22,8 +22,8 @@
 
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake-dark.svg?v=growing-snake-2">
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake.svg?v=growing-snake-2">
-    <img alt="吴乐阳的 GitHub 贡献记录" src="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake.svg?v=growing-snake-2" width="100%">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake-dark.svg?v=timeline-1">
+    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake.svg?v=timeline-1">
+    <img alt="吴乐阳的 GitHub 贡献记录" src="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake.svg?v=timeline-1" width="100%">
   </picture>
 </p>
