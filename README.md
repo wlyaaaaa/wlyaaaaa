@@ -5,8 +5,6 @@
   </picture></a>
 </p>
 
-<p align="center">Java 出身，现在的乐趣是让 AI 替我把电脑和日常打理好。</p>
-
 <p align="center"><a href="https://wly0829.cn/">逛逛我的网站 ↗</a></p>
 
 ### 做点日常用得上的东西
