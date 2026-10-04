@@ -1,29 +1,49 @@
 <p align="center">
-  <picture>
+  <a href="https://wly0829.cn/"><picture>
     <source media="(prefers-color-scheme: dark)" srcset="./assets/profile-banner-dark.webp">
-    <img alt="吴乐阳的绿色全景书桌：录音、识字、电脑使用记录、电脑状态与视频制作" src="./assets/profile-banner-light.webp" width="100%">
-  </picture>
+    <img src="./assets/profile-banner-light.webp" alt="吴乐阳的绿色水彩全景书桌" width="100%">
+  </picture></a>
 </p>
 
-### 项目
+<p align="center">Java 出身，现在的乐趣是让 AI 替我把电脑和日常打理好。</p>
 
-这里放我日常使用和折腾的小项目：中文录音转写、图片识字、电脑使用记录，还有机箱屏和视频制作。
+<p align="center"><a href="https://wly0829.cn/">逛逛我的网站 ↗</a></p>
+
+### 做点日常用得上的东西
 
 <!-- FEATURED_PROJECTS:START -->
 <p align="center">
-  <a href="https://github.com/wlyaaaaa/ChineseASR"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/project-chinese-asr-dark.svg"><img src="./assets/project-chinese-asr.svg" alt="ChineseASR：本地中文录音转写与桌面听写" width="390"></picture></a>
-  <a href="https://github.com/wlyaaaaa/LocalOCR"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/project-local-ocr-dark.svg"><img src="./assets/project-local-ocr.svg" alt="LocalOCR：本地识别图片和扫描件里的字" width="390"></picture></a>
-  <a href="https://github.com/wlyaaaaa/TimeAudit"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/project-timeaudit-dark.svg"><img src="./assets/project-timeaudit.svg" alt="TimeAudit：回看电脑的使用时间和卡顿原因" width="390"></picture></a>
-  <a href="https://github.com/wlyaaaaa/ai-cli-profile-manager"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/project-ai-cli-profile-manager-dark.svg"><img src="./assets/project-ai-cli-profile-manager.svg" alt="ai-cli-profile-manager：一个入口管好几套 AI 命令行" width="390"></picture></a>
-  <a href="https://github.com/wlyaaaaa/PC-Panel-Hub"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/project-pc-panel-hub-dark.svg"><img src="./assets/project-pc-panel-hub.svg" alt="PC-Panel-Hub：机箱小屏和曲面屏上的电脑状态" width="390"></picture></a>
-  <a href="https://github.com/wlyaaaaa/video-scaffold"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/project-video-scaffold-dark.svg"><img src="./assets/project-video-scaffold.svg" alt="video-scaffold：从文案到成片的本地视频流水线" width="390"></picture></a>
+  <a href="https://wly0829.cn/projects/chinese-asr/"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/profile-v2/chinese-asr-dark.webp"><img src="./assets/profile-v2/chinese-asr-light.webp" alt="ChineseASR：把录音变成文字；打开网站介绍" width="390"></picture></a>
+  <a href="https://wly0829.cn/projects/localocr/"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/profile-v2/localocr-dark.webp"><img src="./assets/profile-v2/localocr-light.webp" alt="LocalOCR：把图片里的字提出来；打开网站介绍" width="390"></picture></a>
+</p>
+
+<p align="center">
+  <a href="https://wly0829.cn/projects/timeaudit/"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/profile-v2/timeaudit-dark.webp"><img src="./assets/profile-v2/timeaudit-light.webp" alt="TimeAudit：回看电脑时间与卡顿；打开网站介绍" width="390"></picture></a>
+  <a href="https://wly0829.cn/projects/ai-cli-profile-manager/"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/profile-v2/ai-cli-profile-manager-dark.webp"><img src="./assets/profile-v2/ai-cli-profile-manager-light.webp" alt="AI CLI：让 AI 命令行好用起来；打开网站介绍" width="390"></picture></a>
+</p>
+
+<p align="center">
+  <a href="https://wly0829.cn/projects/pc-panel-hub/"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/profile-v2/pc-panel-hub-dark.webp"><img src="./assets/profile-v2/pc-panel-hub-light.webp" alt="PC Panel：把电脑状态放到小屏上；打开网站介绍" width="390"></picture></a>
+  <a href="https://wly0829.cn/projects/video-scaffold/"><picture><source media="(prefers-color-scheme: dark)" srcset="./assets/profile-v2/video-scaffold-dark.webp"><img src="./assets/profile-v2/video-scaffold-light.webp" alt="Video Scaffold：从文案到成片；打开网站介绍" width="390"></picture></a>
 </p>
 <!-- FEATURED_PROJECTS:END -->
 
+<details>
+<summary>打开项目源码</summary>
+
+[ChineseASR](https://github.com/wlyaaaaa/ChineseASR) · [LocalOCR](https://github.com/wlyaaaaa/LocalOCR) · [TimeAudit](https://github.com/wlyaaaaa/TimeAudit) · [AI CLI](https://github.com/wlyaaaaa/ai-cli-profile-manager) · [PC Panel](https://github.com/wlyaaaaa/PC-Panel-Hub) · [Video Scaffold](https://github.com/wlyaaaaa/video-scaffold)
+
+</details>
+
+### 留一点折腾的足迹
+
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake-dark.svg?v=timeline-1">
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake.svg?v=timeline-1">
-    <img alt="吴乐阳的 GitHub 贡献记录" src="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake.svg?v=timeline-1" width="100%">
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake-dark.svg?v=watercolor-2">
+    <img src="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake.svg?v=watercolor-2" alt="按周向前的小蛇：来自 GitHub 的真实贡献记录" width="100%">
   </picture>
 </p>
+
+从左到右，一周一周往前，走到今天再重新开始。
+
+<p align="center"><a href="https://wly0829.cn/projects/">去网站看完整介绍 ↗</a></p>

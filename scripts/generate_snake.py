@@ -18,8 +18,8 @@ LEVELS = {name: index for index, name in enumerate((
     "NONE", "FIRST_QUARTILE", "SECOND_QUARTILE", "THIRD_QUARTILE", "FOURTH_QUARTILE",
 ))}
 PALETTES = {
-    "light": ("#ebf0ec", "#b4dfc1", "#6fc38c", "#16a34a", "#0f6b32"),
-    "dark": ("#26322b", "#1e5b37", "#1f8a49", "#34b865", "#86e0a4"),
+    "light": ("#e5eee6", "#bfd6c2", "#8db495", "#4b895e", "#28643d"),
+    "dark": ("#263d32", "#30523d", "#42734e", "#67a778", "#9bcca4"),
 }
 SNAKE_COLORS = {"light": "#b77942", "dark": "#d9ad73"}
 INITIAL_LENGTH = 3
@@ -194,18 +194,17 @@ def render_svg(calendar: Calendar, plan: Plan, theme: str) -> str:
     palette, snake = PALETTES[theme], SNAKE_COLORS[theme]
     width, height = calendar.columns * PITCH + 16, 152
     duration = f"{plan.cycle_ms}ms"
-    muted = "#576574" if theme == "light" else "#adbac7"
+    background = "#f6faf5" if theme == "light" else "#14221e"
+    border = "#d6e5d8" if theme == "light" else "#345141"
     point = lambda cell: (16 + cell[0] * PITCH, 32 + cell[1] * PITCH)
     coordinates = [point(cell) for cell in plan.history]
     path = "M" + "L".join(f"{x},{y}" for x, y in coordinates)
     output = [
         f'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 {width} {height}" width="{width}" height="{height}" role="img" aria-labelledby="title desc">',
-        '<title id="title">按周向前的 GitHub 贡献记录</title>',
+        f'<title id="title">按周向前的 GitHub 贡献记录（{calendar.days[0].date} 至 {calendar.today.date}）</title>',
         f'<desc id="desc">{calendar.days[0].date} 至 {calendar.today.date}，从左到右逐周吃格，停在今天两秒后重新开始。</desc>',
         f'<defs><path id="route" d="{path}"/></defs>',
-        f'<g font-family="Segoe UI,Arial,Microsoft YaHei,sans-serif" font-size="11" fill="{muted}">',
-        f'<text x="10" y="13">{calendar.days[0].date}</text>',
-        f'<text x="{width - 10}" y="13" text-anchor="end">{calendar.today.date} · 今天</text></g>',
+        f'<rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="16" fill="{background}" stroke="{border}" stroke-width="1"/>',
     ]
     for index, day in enumerate(calendar.days):
         x, y = point((day.column, day.row))
