@@ -5,7 +5,7 @@ import xml.etree.ElementTree as ET
 
 from scripts.generate_snake import (
     Calendar, Day, HOLD_MS, INITIAL_LENGTH, LEVELS, MAX_LENGTH, PALETTES,
-    SNAKE_COLORS, fetch_calendar, parse_calendar, plan_snake, render_svg,
+    RETURN_MS, SNAKE_COLORS, fetch_calendar, parse_calendar, plan_snake, render_svg,
 )
 
 NS = {"s": "http://www.w3.org/2000/svg"}
@@ -129,7 +129,7 @@ class RouteTests(unittest.TestCase):
         plan = plan_snake(calendar([[4] * 7] * 52 + [[4]]))
         self.assertLess(plan.step_ms, 90)
         self.assertLessEqual(plan.cycle_ms, 25000)
-        self.assertEqual(HOLD_MS, plan.cycle_ms - plan.move_ms)
+        self.assertEqual(HOLD_MS + RETURN_MS, plan.cycle_ms - plan.move_ms)
 
 
 class SvgTests(unittest.TestCase):
@@ -152,7 +152,7 @@ class SvgTests(unittest.TestCase):
             day = cell.get("data-date")
             animation = cell.find("s:animate", NS)
             if day in plan.eaten:
-                self.assertEqual("discrete", animation.get("calcMode"))
+                self.assertEqual("linear", animation.get("calcMode"))
                 times = [float(t) for t in animation.get("keyTimes").split(";")]
                 expected = plan.eaten[day] * plan.step_ms / plan.cycle_ms
                 self.assertAlmostEqual(expected, times[1] if expected else 0, places=8)
@@ -165,7 +165,8 @@ class SvgTests(unittest.TestCase):
             index = int(segment.get("data-segment"))
             motion = segment.find("s:animateMotion", NS)
             times = [float(t) for t in motion.get("keyTimes").split(";")]
-            self.assertAlmostEqual(plan.move_ms / plan.cycle_ms, times[-2], places=8)
+            self.assertAlmostEqual(plan.move_ms / plan.cycle_ms, times[-3], places=8)
+            self.assertAlmostEqual((plan.move_ms + HOLD_MS) / plan.cycle_ms, times[-2], places=8)
             if index >= INITIAL_LENGTH:
                 born = next(i for i, length in enumerate(plan.lengths) if length > index)
                 opacity = segment.find("s:animate", NS)

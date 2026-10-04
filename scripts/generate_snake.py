@@ -26,6 +26,7 @@ INITIAL_LENGTH = 3
 MAX_LENGTH = 16
 STEP_MS = 90
 HOLD_MS = 2000
+RETURN_MS = 2400
 PITCH = 16
 QUERY = """query($login:String!,$from:DateTime,$to:DateTime){
   user(login:$login){contributionsCollection(from:$from,to:$to){
@@ -71,7 +72,11 @@ class Plan:
 
     @property
     def cycle_ms(self) -> int:
-        return self.move_ms + HOLD_MS
+        return self.move_ms + HOLD_MS + self.return_ms
+
+    @property
+    def return_ms(self) -> int:
+        return RETURN_MS if self.move_ms else 0
 
 
 def parse_calendar(payload: dict) -> Calendar:
@@ -181,13 +186,29 @@ def plan_snake(calendar: Calendar) -> Plan:
         raise ValueError("Route missed a contribution day")
     steps = len(route) - 1
     step_ms = STEP_MS
-    if steps * STEP_MS + HOLD_MS > 30000:
-        step_ms = max(1, 23000 // steps)
+    if steps * STEP_MS + HOLD_MS + RETURN_MS > 30000:
+        step_ms = max(1, (23000 - RETURN_MS) // steps)
     return Plan(tuple(route), tuple(history), eaten, tuple(lengths), points, score, step_ms)
 
 
 def _fraction(value: float) -> str:
     return f"{value:.9f}".rstrip("0").rstrip(".") or "0"
+
+
+def _return_route(plan: Plan) -> tuple[tuple[int, int], ...]:
+    """Return below the calendar, then replay the initial three body positions."""
+    if not plan.return_ms:
+        return ()
+    column, row = plan.route[-1]
+    route = []
+    for target_column, target_row in ((column, 7), (0, 7), *plan.history[:3]):
+        while column != target_column or row != target_row:
+            if column != target_column:
+                column += 1 if target_column > column else -1
+            else:
+                row += 1 if target_row > row else -1
+            route.append((column, row))
+    return tuple(route)
 
 
 def render_svg(calendar: Calendar, plan: Plan, theme: str) -> str:
@@ -197,12 +218,14 @@ def render_svg(calendar: Calendar, plan: Plan, theme: str) -> str:
     background = "#f6faf5" if theme == "light" else "#14221e"
     border = "#d6e5d8" if theme == "light" else "#345141"
     point = lambda cell: (16 + cell[0] * PITCH, 32 + cell[1] * PITCH)
-    coordinates = [point(cell) for cell in plan.history]
+    coordinates = [point(cell) for cell in (*plan.history, *_return_route(plan))]
+    return_start = (plan.move_ms + HOLD_MS) / plan.cycle_ms
+    restore_end = (plan.move_ms + HOLD_MS + plan.return_ms * 0.65) / plan.cycle_ms
     path = "M" + "L".join(f"{x},{y}" for x, y in coordinates)
     output = [
         f'<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 {width} {height}" width="{width}" height="{height}" role="img" aria-labelledby="title desc">',
         f'<title id="title">按周向前的 GitHub 贡献记录（{calendar.days[0].date} 至 {calendar.today.date}）</title>',
-        f'<desc id="desc">{calendar.days[0].date} 至 {calendar.today.date}，从左到右逐周吃格，停在今天两秒后重新开始。</desc>',
+        f'<desc id="desc">{calendar.days[0].date} 至 {calendar.today.date}，从左到右逐周吃格，停在今天两秒后沿底部回到起点，无限循环。</desc>',
         f'<defs><path id="route" d="{path}"/></defs>',
         f'<rect x="0.5" y="0.5" width="{width - 1}" height="{height - 1}" rx="16" fill="{background}" stroke="{border}" stroke-width="1"/>',
     ]
@@ -212,19 +235,22 @@ def render_svg(calendar: Calendar, plan: Plan, theme: str) -> str:
         if day.date in plan.eaten:
             arrival = plan.eaten[day.date] * plan.step_ms
             if arrival:
-                values = f"{palette[day.level]};{palette[0]};{palette[0]}"
-                times = f"0;{_fraction(arrival / plan.cycle_ms)};1"
+                values = f"{palette[day.level]};{palette[day.level]};{palette[0]};{palette[0]};{palette[day.level]};{palette[day.level]}"
+                at = _fraction(arrival / plan.cycle_ms)
+                times = f"0;{at};{at};{_fraction(return_start)};{_fraction(restore_end)};1"
             else:
                 values, times = f"{palette[0]};{palette[0]}", "0;1"
-            output.append(f'<animate attributeName="fill" values="{values}" keyTimes="{times}" calcMode="discrete" dur="{duration}" repeatCount="indefinite"/>')
+            output.append(f'<animate attributeName="fill" values="{values}" keyTimes="{times}" calcMode="linear" dur="{duration}" repeatCount="indefinite"/>')
         output.append('</rect>')
     today_x, today_y = point((calendar.today.column, calendar.today.row))
     output.append(f'<rect x="{today_x - 7.5}" y="{today_y - 7.5}" width="15" height="15" rx="4" fill="none" stroke="{snake}" stroke-width="1"/>')
-    total_edges = len(plan.history) - 1
+    total_edges = len(coordinates) - 1
+    food_edges = len(plan.history) - 1
     movement_end = plan.move_ms / plan.cycle_ms
     for segment in reversed(range(max(plan.lengths))):
         start = max(0, 2 - segment) / total_edges
-        finish = max(0, total_edges - segment) / total_edges
+        finish = max(0, food_edges - segment) / total_edges
+        loop_finish = max(0, total_edges - segment) / total_edges
         delay_ms = max(0, segment - 2) * plan.step_ms
         if not plan.move_ms:
             points, times = f"{_fraction(start)};{_fraction(start)}", "0;1"
@@ -236,14 +262,20 @@ def render_svg(calendar: Calendar, plan: Plan, theme: str) -> str:
         else:
             points = f"{_fraction(start)};{_fraction(finish)};{_fraction(finish)}"
             times = f"0;{_fraction(movement_end)};1"
+        if plan.return_ms:
+            points = points.rsplit(";", 1)[0] + f";{_fraction(finish)};{_fraction(loop_finish)}"
+            times = times.rsplit(";", 1)[0] + f";{_fraction(return_start)};1"
         output.append(f'<g class="s" data-segment="{segment}" fill="{snake}" opacity="{1 if segment < INITIAL_LENGTH else 0}">')
         size = 12 if segment == 0 else 10
         output.append(f'<rect x="{-size / 2:g}" y="{-size / 2:g}" width="{size}" height="{size}" rx="4"/>')
         output.append(f'<animateMotion dur="{duration}" repeatCount="indefinite" calcMode="linear" keyPoints="{points}" keyTimes="{times}"><mpath xlink:href="#route"/></animateMotion>')
         if segment >= INITIAL_LENGTH:
             born = next(step for step, length in enumerate(plan.lengths) if length > segment)
-            if born:
-                output.append(f'<animate attributeName="opacity" values="0;1;1" keyTimes="0;{_fraction(born * plan.step_ms / plan.cycle_ms)};1" calcMode="discrete" dur="{duration}" repeatCount="indefinite"/>')
+            if plan.return_ms:
+                # A first-cell score starts growing on the first move, so every
+                # moving cycle begins and ends with the same three segments.
+                at = _fraction(max(1, born) * plan.step_ms / plan.cycle_ms)
+                output.append(f'<animate attributeName="opacity" values="0;0;1;1;0;0" keyTimes="0;{at};{at};{_fraction(return_start)};{_fraction(restore_end)};1" calcMode="linear" dur="{duration}" repeatCount="indefinite"/>')
             else:
                 output.append(f'<animate attributeName="opacity" values="1;1" dur="{duration}" repeatCount="indefinite"/>')
         output.append('</g>')
@@ -262,7 +294,7 @@ def metrics(calendar: Calendar, plan: Plan) -> dict:
             "initial_length": INITIAL_LENGTH, "final_length": plan.lengths[-1],
             "max_length": MAX_LENGTH, "moves": len(plan.route) - 1,
             "step_ms": plan.step_ms, "move_ms": plan.move_ms,
-            "hold_ms": HOLD_MS, "cycle_ms": plan.cycle_ms}
+            "hold_ms": HOLD_MS, "return_ms": plan.return_ms, "cycle_ms": plan.cycle_ms}
 
 
 def main() -> int:
