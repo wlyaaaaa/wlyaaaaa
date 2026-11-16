@@ -1,0 +1,11 @@
+{
+  "v": 1,
+  "at": "2026-11-15T06:32:04Z",
+  "scope": "图上数据到 2026-11-15；覆盖 2025-11-16 至 2026-11-15；亮暗两图只算一次。",
+  "calendar_fingerprint": "414973552db290ded629dca35c0520d73d4376a15006715f63c58a877adb8631",
+  "profile_at": "2026-10-20T03:18:54-05:00",
+  "profile_scope": "本仓 README 与实际配图；随主页内容更新时重取。",
+  "metrics": {"cards": 6, "source_links": 6, "image_files": 14, "image_bytes": 600606, "card_list": [{"text": "ChineseASR", "href": "https://wly0829.cn/projects/chinese-asr/", "state_text": "已展示"}, {"text": "LocalOCR", "href": "https://wly0829.cn/projects/localocr/", "state_text": "已展示"}, {"text": "TimeAudit", "href": "https://wly0829.cn/projects/timeaudit/", "state_text": "已展示"}, {"text": "AI CLI", "href": "https://wly0829.cn/projects/ai-cli-profile-manager/", "state_text": "已展示"}, {"text": "PC Panel", "href": "https://wly0829.cn/projects/pc-panel-hub/", "state_text": "已展示"}, {"text": "Video Scaffold", "href": "https://wly0829.cn/projects/video-scaffold/", "state_text": "已展示"}], "contribution_days": 152, "longest_streak": 103, "data_through": "2026-11-15", "calendar_days": 365, "last_active": "2026-11-14", "snake_bytes": 177642},
+  "size": {"at": "2026-11-16T01:29:19.922605+00:00", "fingerprint": "c4847c167e18e4ffc63f989a426f3c461ee41eb12d6a33c3110fbc257ec17567", "docs_chars": 3785, "code_lines": 651},
+  "artifacts": [{"at": "2026-10-20T03:18:54-05:00", "kind": "page", "title": "GitHub 个人主页", "status": "completed", "public": "same", "open": {"source": "profile.readme", "href": "https://github.com/wlyaaaaa"}}, {"at": "2026-11-15T06:32:04Z", "kind": "svg", "title": "贡献小蛇（图上数据到 2026-11-15）", "status": "completed", "public": "same", "open": {"source": "profile.snake", "href": "https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake.svg"}}]
+}

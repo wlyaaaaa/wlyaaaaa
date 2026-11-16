@@ -1,11 +1,14 @@
 from datetime import date, timedelta
+from pathlib import Path
+import json
+import tempfile
 import unittest
 from unittest.mock import patch
 import xml.etree.ElementTree as ET
 
 from scripts.generate_snake import (
     Calendar, Day, HOLD_MS, INITIAL_LENGTH, LEVELS, MAX_LENGTH, PALETTES,
-    RETURN_MS, SNAKE_COLORS, fetch_calendar, parse_calendar, plan_snake, render_svg,
+    RETURN_MS, SNAKE_COLORS, fetch_calendar, live_snapshot, parse_calendar, plan_snake, render_svg, write_live_snapshot,
 )
 
 NS = {"s": "http://www.w3.org/2000/svg"}
@@ -31,6 +34,26 @@ def response(value: Calendar) -> dict:
 
 
 class DataTests(unittest.TestCase):
+    def test_live_summary_counts_days_once_and_breaks_on_missing_dates(self):
+        svg = '<svg>' + ''.join(f'<rect data-date="{day}" data-level="{level}"/>' for day, level in
+              [("2026-11-01", 1), ("2026-11-02", 4), ("2026-11-03", 0), ("2026-11-04", 1), ("2026-11-06", 2)]) + '</svg>'
+        root = Path(__file__).resolve().parents[1]
+        result = live_snapshot(root, dict(light=svg, dark=svg), "2026-11-07T00:20:00Z")
+        self.assertEqual((result["metrics"]["contribution_days"], result["metrics"]["longest_streak"], result["metrics"]["calendar_days"]), (4, 2, 5))
+        self.assertEqual(result["at"], "2026-11-07T00:20:00Z")
+        self.assertEqual(result["metrics"]["snake_bytes"], 2 * len(svg.encode()))
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory) / "snapshot.json"
+            write_live_snapshot(target, result)
+            repeated = live_snapshot(root, dict(light=svg, dark=svg), "2026-11-08T00:20:00Z")
+            write_live_snapshot(target, repeated)
+            saved = json.loads(target.read_text("utf-8"))
+            self.assertEqual((saved["at"], saved["size"]["at"]), (result["at"], result["size"]["at"]))
+        missing = live_snapshot(root, {}, None, "读取失败")
+        self.assertIsNone(missing["metrics"]["contribution_days"])
+        self.assertEqual(missing["scope"], "读取失败")
+        self.assertEqual(len(missing["artifacts"]), 1)
+
     def test_maps_api_levels_without_rebinning_counts(self) -> None:
         source = calendar([[0, 1, 2, 3, 4]])
         payload = response(source)

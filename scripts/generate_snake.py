@@ -5,13 +5,17 @@ from __future__ import annotations
 
 import argparse
 from dataclasses import dataclass
-from datetime import date
+from datetime import date, datetime, timedelta, timezone
+import hashlib
 import json
 import math
 import os
 from pathlib import Path
+import re
+import subprocess
 import urllib.error
 import urllib.request
+import xml.etree.ElementTree as ET
 
 
 LEVELS = {name: index for index, name in enumerate((
@@ -297,13 +301,103 @@ def metrics(calendar: Calendar, plan: Plan) -> dict:
             "hold_ms": HOLD_MS, "return_ms": plan.return_ms, "cycle_ms": plan.cycle_ms}
 
 
+def live_snapshot(root: Path, svgs: dict[str, str], at: str | None, reason="") -> dict:
+    """Summarize published day cells once; themes never add to contribution totals."""
+    def git(*args):
+        return subprocess.check_output(["git", "-C", str(root), *args]).decode("utf-8").strip()
+    readme = (root / "README.md").read_text("utf-8")
+    cards = re.findall(r'<a href="(https://wly0829.cn/projects/[^/\"]+/)">.*?<img[^>]+alt="([^\"]+)"', readme)
+    source_links = sorted(set(re.findall(r'https://github.com/wlyaaaaa/([^/\s)]+)', readme)))
+    images = [root / p for p in git("ls-files", "assets").splitlines() if p.endswith(".webp")]
+    profile_at = git("log", "-1", "--format=%cI", "--", "README.md", "assets")
+    rows = sorted((e.attrib["data-date"], int(e.attrib["data-level"]))
+                  for e in ET.fromstring(svgs["light"]).iter() if "data-date" in e.attrib) if svgs else []
+    if svgs:
+        dark = sorted((e.attrib["data-date"], int(e.attrib["data-level"]))
+                      for e in ET.fromstring(svgs["dark"]).iter() if "data-date" in e.attrib)
+        if rows != dark or not rows or len({d for d, _ in rows}) != len(rows):
+            raise ValueError("Light/dark calendars differ or contain no unique day cells")
+    streak = longest = 0
+    previous = None
+    for day, level in rows:
+        current = date.fromisoformat(day)
+        streak = (streak + 1 if previous and current - previous == timedelta(days=1) else 1) if level else 0
+        longest, previous = max(longest, streak), current
+    data = dict(cards=len(cards), source_links=len(source_links), image_files=len(images),
+                image_bytes=sum(p.stat().st_size for p in images),
+                card_list=[dict(text=title.split("：")[0], href=href, state_text="已展示") for href, title in cards],
+                contribution_days=sum(level > 0 for _, level in rows) if rows else None,
+                longest_streak=longest if rows else None, data_through=rows[-1][0] if rows else None,
+                calendar_days=len(rows) if rows else None,
+                last_active=max((d for d, level in rows if level), default=None),
+                snake_bytes=sum(len(s.encode("utf-8")) for s in svgs.values()) if svgs else None)
+    files = [root / p for p in git("ls-files", "--cached", "--others", "--exclude-standard").splitlines()
+             if Path(p).suffix in {".md", ".py"}]
+    fingerprint = hashlib.sha256(b"".join(p.relative_to(root).as_posix().encode() + p.read_bytes() for p in sorted(files))).hexdigest()
+    size = dict(at=datetime.now(timezone.utc).isoformat(), fingerprint=fingerprint,
+                docs_chars=sum(len(p.read_text("utf-8-sig")) for p in files if p.suffix == ".md"),
+                code_lines=sum(len(p.read_text("utf-8-sig").splitlines()) for p in files if p.suffix == ".py"))
+    scope = f"图上数据到 {rows[-1][0]}；覆盖 {rows[0][0]} 至 {rows[-1][0]}；亮暗两图只算一次。" if rows else reason
+    return dict(v=1, at=at, scope=scope, calendar_fingerprint=hashlib.sha256("".join(svgs.values()).encode()).hexdigest() if svgs else None,
+                profile_at=profile_at, profile_scope="本仓 README 与实际配图；随主页内容更新时重取。",
+                metrics=data, size=size, artifacts=[dict(at=profile_at, kind="page", title="GitHub 个人主页", status="completed", public="same",
+                open=dict(source="profile.readme", href="https://github.com/wlyaaaaa"))] + ([dict(at=at, kind="svg",
+                title=f"贡献小蛇（图上数据到 {rows[-1][0]}）", status="completed", public="same",
+                open=dict(source="profile.snake", href="https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake.svg"))] if rows else []))
+
+
+def write_live_snapshot(path: Path, snapshot: dict) -> None:
+    previous = json.loads(path.read_text("utf-8")) if path.exists() else {}
+    if snapshot.get("calendar_fingerprint") and previous.get("calendar_fingerprint") == snapshot["calendar_fingerprint"]:
+        snapshot["at"] = previous["at"]
+        for artifact in snapshot["artifacts"]:
+            if artifact["kind"] == "svg": artifact["at"] = previous["at"]
+    if previous.get("size", {}).get("fingerprint") == snapshot["size"]["fingerprint"]:
+        snapshot["size"]["at"] = previous["size"]["at"]
+    path.parent.mkdir(parents=True, exist_ok=True)
+    # One JSON object/array per line keeps the small public receipt easy to review.
+    path.write_text("{\n" + ",\n".join("  " + json.dumps(k) + ": " + json.dumps(v, ensure_ascii=False)
+                    for k, v in snapshot.items()) + "\n}\n", encoding="utf-8")
+
+
+def refresh_live(root: Path, output: Path, target: Path) -> bool:
+    """Read the published output at one immutable commit, without credentials."""
+    svgs, at, reason = {}, None, ""
+    try:
+        request = urllib.request.Request("https://api.github.com/repos/wlyaaaaa/wlyaaaaa/commits/output",
+                                         headers={"User-Agent": "github-profile-live"})
+        with urllib.request.urlopen(request, timeout=45) as response:
+            commit = json.load(response)
+        for theme in PALETTES:
+            name = "github-contribution-grid-snake" + ("-dark" if theme == "dark" else "") + ".svg"
+            url = f"https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/{commit['sha']}/{name}"
+            with urllib.request.urlopen(url, timeout=45) as response:
+                svgs[theme] = response.read().decode("utf-8")
+        at = commit["commit"]["committer"]["date"]
+        snapshot = live_snapshot(root, svgs, at)
+    except (OSError, ValueError, KeyError, ET.ParseError) as error:
+        svgs, reason = {}, f"最新已发布贡献图读取失败（{type(error).__name__}）；未用本地旧图替代。"
+        snapshot = live_snapshot(root, svgs, None, reason)
+    output.mkdir(parents=True, exist_ok=True)
+    for theme, svg in svgs.items():
+        name = "github-contribution-grid-snake" + ("-dark" if theme == "dark" else "") + ".svg"
+        (output / name).write_text(svg, encoding="utf-8", newline="\n")
+    write_live_snapshot(target, snapshot)
+    return bool(svgs)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--user", default=os.environ.get("GITHUB_REPOSITORY_OWNER"))
     parser.add_argument("--input-json", type=Path, help="Replay a saved GraphQL response offline.")
     parser.add_argument("--output-dir", type=Path, default=Path("dist"))
+    parser.add_argument("--live-output", type=Path, help="Write the small public live-project receipt.")
+    parser.add_argument("--refresh-live", action="store_true", help="Refresh from published SVGs; never regenerate the animation.")
     args = parser.parse_args()
     try:
+        root = Path(__file__).resolve().parents[1]
+        if args.refresh_live:
+            return 0 if refresh_live(root, args.output_dir, args.live_output or root / "docs/live.snapshot.json") else 1
         if args.input_json:
             payload = json.loads(args.input_json.read_text(encoding="utf-8"))
         else:
@@ -318,6 +412,8 @@ def main() -> int:
         for theme, svg in results.items():
             suffix = "-dark" if theme == "dark" else ""
             (args.output_dir / f"github-contribution-grid-snake{suffix}.svg").write_text(svg, encoding="utf-8", newline="\n")
+        if args.live_output:
+            write_live_snapshot(args.live_output, live_snapshot(root, results, datetime.now(timezone.utc).isoformat()))
         print(json.dumps(metrics(calendar, plan), ensure_ascii=False))
         return 0
     except (ValueError, KeyError, OSError, urllib.error.URLError) as error:

@@ -26,6 +26,8 @@ jobs:
     steps:
       - name: Check out timeline generator
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          fetch-depth: 0
 
       - name: Test timeline generator
         run: python3 -m unittest discover -s tests -v
@@ -36,7 +38,7 @@ jobs:
         run: |
           python3 scripts/generate_snake.py \
             --user "${{ github.repository_owner }}" \
-            --output-dir dist
+            --output-dir dist --live-output dist/live.snapshot.json
 
       - name: Publish generated SVG files
         uses: peaceiris/actions-gh-pages@84c30a85c19949d7eee79c4ff27748b70285e453 # v4
