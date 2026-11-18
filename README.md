@@ -29,7 +29,7 @@
 <details>
 <summary>打开项目源码</summary>
 
-[ChineseASR](https://github.com/wlyaaaaa/ChineseASR) · [LocalOCR](https://github.com/wlyaaaaa/LocalOCR) · [TimeAudit](https://github.com/wlyaaaaa/TimeAudit) · [AI CLI](https://github.com/wlyaaaaa/ai-cli-profile-manager) · [PC Panel](https://github.com/wlyaaaaa/PC-Panel-Hub) · [Video Scaffold](https://github.com/wlyaaaaa/video-scaffold)
+[ChineseASR](https://github.com/wlyaaaaa/ChineseASR) · [LocalOCR](https://github.com/wlyaaaaa/LocalOCR) · [TimeAudit](https://github.com/wlyaaaaa/TimeAudit) · [AI CLI](https://github.com/wlyaaaaa/ai-cli-profile-manager) · [PC Panel](https://github.com/wlyaaaaa/PC-Panel-Hub)
 
 </details>
 
