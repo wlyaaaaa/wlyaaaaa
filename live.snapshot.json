@@ -1,11 +1,11 @@
 {
   "v": 1,
-  "at": "2026-11-22T01:12:03.729795+00:00",
+  "at": "2026-11-22T06:48:17.097801+00:00",
   "scope": "图上数据到 2026-11-22；覆盖 2025-11-23 至 2026-11-22；亮暗两图只算一次。",
   "calendar_fingerprint": "e28251c91bf8904022ef95d3618a5d610744511488bc3e4115c88ca9bd0017df",
   "profile_at": "2026-11-21T17:25:48-07:00",
   "profile_scope": "本仓 README 与实际配图；随主页内容更新时重取。",
   "metrics": {"cards": 0, "source_links": 0, "image_files": 0, "image_bytes": 0, "card_list": [], "contribution_days": 159, "longest_streak": 110, "data_through": "2026-11-22", "calendar_days": 365, "last_active": "2026-11-21", "snake_bytes": 180532},
-  "size": {"at": "2026-11-22T01:12:03.736336+00:00", "fingerprint": "26b53aa448b729ae59719cf4ef2135634699b981d8316286ed069a0d69f61ed5", "docs_chars": 1814, "code_lines": 810},
-  "artifacts": [{"at": "2026-11-21T17:25:48-07:00", "kind": "page", "title": "GitHub 个人主页", "status": "completed", "public": "same", "open": {"source": "profile.readme", "href": "https://github.com/wlyaaaaa"}}, {"at": "2026-11-22T01:12:03.729795+00:00", "kind": "svg", "title": "贡献小蛇（图上数据到 2026-11-22）", "status": "completed", "public": "same", "open": {"source": "profile.snake", "href": "https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake.svg"}}]
+  "size": {"at": "2026-11-22T06:48:17.106292+00:00", "fingerprint": "26b53aa448b729ae59719cf4ef2135634699b981d8316286ed069a0d69f61ed5", "docs_chars": 1814, "code_lines": 810},
+  "artifacts": [{"at": "2026-11-21T17:25:48-07:00", "kind": "page", "title": "GitHub 个人主页", "status": "completed", "public": "same", "open": {"source": "profile.readme", "href": "https://github.com/wlyaaaaa"}}, {"at": "2026-11-22T06:48:17.097801+00:00", "kind": "svg", "title": "贡献小蛇（图上数据到 2026-11-22）", "status": "completed", "public": "same", "open": {"source": "profile.snake", "href": "https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/output/github-contribution-grid-snake.svg"}}]
 }
