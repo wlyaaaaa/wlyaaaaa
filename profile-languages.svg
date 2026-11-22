@@ -3,11 +3,11 @@
 <rect x=".5" y=".5" width="389" height="154" rx="8" fill="#ffffff" stroke="#d0d7de"/>
 <g font-family="-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif" fill="#24292f" font-size="13">
 <text x="22" y="32" fill="#00A650" font-size="19" font-weight="700">Top Languages</text>
-<rect x="22.0000" y="47" width="113.1392" height="9" fill="#3572A5"/><circle cx="26" cy="80" r="4" fill="#3572A5"/><text x="37" y="84">Python 32.7%</text>
-<rect x="135.1392" y="47" width="68.9554" height="9" fill="#012456"/><circle cx="199" cy="80" r="4" fill="#012456"/><text x="210" y="84">PowerShell 19.9%</text>
-<rect x="204.0946" y="47" width="55.1042" height="9" fill="#f1e05a"/><circle cx="26" cy="102" r="4" fill="#f1e05a"/><text x="37" y="106">JavaScript 15.9%</text>
-<rect x="259.1988" y="47" width="45.9926" height="9" fill="#e34c26"/><circle cx="199" cy="102" r="4" fill="#e34c26"/><text x="210" y="106">HTML 13.3%</text>
-<rect x="305.1913" y="47" width="36.9820" height="9" fill="#3178c6"/><circle cx="26" cy="124" r="4" fill="#3178c6"/><text x="37" y="128">TypeScript 10.7%</text>
-<rect x="342.1733" y="47" width="25.8267" height="9" fill="#8b949e"/><circle cx="199" cy="124" r="4" fill="#8b949e"/><text x="210" y="128">Other 7.5%</text>
+<rect x="22.0000" y="47" width="113.1884" height="9" fill="#3572A5"/><circle cx="26" cy="80" r="4" fill="#3572A5"/><text x="37" y="84">Python 32.7%</text>
+<rect x="135.1884" y="47" width="68.9408" height="9" fill="#012456"/><circle cx="199" cy="80" r="4" fill="#012456"/><text x="210" y="84">PowerShell 19.9%</text>
+<rect x="204.1292" y="47" width="55.0925" height="9" fill="#f1e05a"/><circle cx="26" cy="102" r="4" fill="#f1e05a"/><text x="37" y="106">JavaScript 15.9%</text>
+<rect x="259.2217" y="47" width="45.9828" height="9" fill="#e34c26"/><circle cx="199" cy="102" r="4" fill="#e34c26"/><text x="210" y="106">HTML 13.3%</text>
+<rect x="305.2046" y="47" width="36.9742" height="9" fill="#3178c6"/><circle cx="26" cy="124" r="4" fill="#3178c6"/><text x="37" y="128">TypeScript 10.7%</text>
+<rect x="342.1787" y="47" width="25.8213" height="9" fill="#8b949e"/><circle cx="199" cy="124" r="4" fill="#8b949e"/><text x="210" y="128">Other 7.5%</text>
 </g>
 </svg>
