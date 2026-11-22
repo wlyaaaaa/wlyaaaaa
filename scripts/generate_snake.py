@@ -22,8 +22,8 @@ LEVELS = {name: index for index, name in enumerate((
     "NONE", "FIRST_QUARTILE", "SECOND_QUARTILE", "THIRD_QUARTILE", "FOURTH_QUARTILE",
 ))}
 PALETTES = {
-    "light": ("#e5eee6", "#bfd6c2", "#8db495", "#4b895e", "#28643d"),
-    "dark": ("#263d32", "#30523d", "#42734e", "#67a778", "#9bcca4"),
+    "light": ("#e5eee6", "#bfe8cf", "#7dd0a1", "#33b872", "#00A650"),
+    "dark": ("#263d32", "#1d5136", "#11743f", "#068f48", "#00A650"),
 }
 SNAKE_COLORS = {"light": "#b77942", "dark": "#d9ad73"}
 INITIAL_LENGTH = 3
