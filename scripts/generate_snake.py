@@ -364,18 +364,25 @@ def refresh_live(root: Path, output: Path, target: Path) -> bool:
     """Read the published output at one immutable commit, without credentials."""
     svgs, at, reason = {}, None, ""
     try:
-        request = urllib.request.Request("https://api.github.com/repos/wlyaaaaa/wlyaaaaa/commits/output",
-                                         headers={"User-Agent": "github-profile-live"})
-        with urllib.request.urlopen(request, timeout=45) as response:
-            commit = json.load(response)
+        output_ref = "refs/heads/output"
+        remote = subprocess.check_output(
+            ["git", "ls-remote", "--refs", "https://github.com/wlyaaaaa/wlyaaaaa.git", output_ref],
+            cwd=root, text=True, timeout=25, env=dict(os.environ, GIT_TERMINAL_PROMPT="0"),
+        )
+        sha, ref = remote.split()
+        if ref != output_ref or not re.fullmatch(r"[0-9a-f]{40}", sha):
+            raise ValueError("Could not resolve the published output commit")
+        base_url = f"https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/{sha}"
+        with urllib.request.urlopen(f"{base_url}/live.snapshot.json", timeout=25) as response:
+            at = json.load(response)["at"]
+        if not isinstance(at, str) or datetime.fromisoformat(at).utcoffset() is None:
+            raise ValueError("Published snake generation time is missing")
         for theme in PALETTES:
             name = "github-contribution-grid-snake" + ("-dark" if theme == "dark" else "") + ".svg"
-            url = f"https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/{commit['sha']}/{name}"
-            with urllib.request.urlopen(url, timeout=45) as response:
+            with urllib.request.urlopen(f"{base_url}/{name}", timeout=25) as response:
                 svgs[theme] = response.read().decode("utf-8")
-        at = commit["commit"]["committer"]["date"]
         snapshot = live_snapshot(root, svgs, at)
-    except (OSError, ValueError, KeyError, ET.ParseError) as error:
+    except (OSError, subprocess.SubprocessError, ValueError, KeyError, ET.ParseError) as error:
         svgs, reason = {}, f"最新已发布贡献图读取失败（{type(error).__name__}）；未用本地旧图替代。"
         snapshot = live_snapshot(root, svgs, None, reason)
     output.mkdir(parents=True, exist_ok=True)
