@@ -32,6 +32,12 @@ STEP_MS = 90
 HOLD_MS = 2000
 RETURN_MS = 2400
 PITCH = 16
+PROFILE_REPO = "wlyaaaaa/wlyaaaaa"
+OUTPUT_REF = "refs/heads/output"
+OUTPUT_ASSETS = f"https://raw.githubusercontent.com/{PROFILE_REPO}/output/"
+PIN_QUERY = """query { user(login: "wlyaaaaa") { pinnedItems(first: 6, types: [REPOSITORY]) {
+  nodes { ... on Repository { name url visibility } }
+} } }"""
 QUERY = """query($login:String!,$from:DateTime,$to:DateTime){
   user(login:$login){contributionsCollection(from:$from,to:$to){
     contributionCalendar{weeks{firstDay contributionDays{
@@ -301,15 +307,14 @@ def metrics(calendar: Calendar, plan: Plan) -> dict:
             "hold_ms": HOLD_MS, "return_ms": plan.return_ms, "cycle_ms": plan.cycle_ms}
 
 
-def live_snapshot(root: Path, svgs: dict[str, str], at: str | None, reason="") -> dict:
+def live_snapshot(root: Path, svgs: dict[str, str], at: str | None, reason="", *,
+                  published_files=None, mirror_at=None, pins=None, pins_at=None) -> dict:
     """Summarize published day cells once; themes never add to contribution totals."""
     def git(*args):
         return subprocess.check_output(["git", "-C", str(root), *args]).decode("utf-8").strip()
     readme = (root / "README.md").read_text("utf-8")
-    cards = re.findall(r'<a href="(https://wly0829.cn/projects/[^/\"]+/)">.*?<img[^>]+alt="([^\"]+)"', readme)
-    source_links = sorted(set(re.findall(r'https://github.com/wlyaaaaa/([^/\s)]+)', readme)))
-    images = [root / p for p in git("ls-files", "assets").splitlines() if p.endswith(".webp")]
-    profile_at = git("log", "-1", "--format=%cI", "--", "README.md", "assets")
+    source_links = {link.casefold() for link in re.findall(r'https://github\.com/[\w.-]+/[\w.-]+', readme)}
+    profile_at = git("log", "-1", "--format=%cI", "--", "README.md")
     rows = sorted((e.attrib["data-date"], int(e.attrib["data-level"]))
                   for e in ET.fromstring(svgs["light"]).iter() if "data-date" in e.attrib) if svgs else []
     if svgs:
@@ -323,10 +328,11 @@ def live_snapshot(root: Path, svgs: dict[str, str], at: str | None, reason="") -
         current = date.fromisoformat(day)
         streak = (streak + 1 if previous and current - previous == timedelta(days=1) else 1) if level else 0
         longest, previous = max(longest, streak), current
-    data = dict(cards=len(cards), source_links=len(source_links), image_files=len(images),
-                image_bytes=sum(p.stat().st_size for p in images),
-                card_list=[dict(text=title.split("：")[0], href=href, state_text="已展示") for href, title in cards],
+    image_metrics = published_files if published_files is not None else dict(image_kinds=None, image_files=None, image_bytes=None)
+    data = dict(cards=len(pins) if pins is not None else None, card_list=pins,
+                source_links=len(source_links), **image_metrics,
                 contribution_days=sum(level > 0 for _, level in rows) if rows else None,
+                coverage_start=rows[0][0] if rows else None,
                 longest_streak=longest if rows else None, data_through=rows[-1][0] if rows else None,
                 calendar_days=len(rows) if rows else None,
                 last_active=max((d for d, level in rows if level), default=None),
@@ -339,7 +345,8 @@ def live_snapshot(root: Path, svgs: dict[str, str], at: str | None, reason="") -
                 code_lines=sum(len(p.read_text("utf-8-sig").splitlines()) for p in files if p.suffix == ".py"))
     scope = f"图上数据到 {rows[-1][0]}；覆盖 {rows[0][0]} 至 {rows[-1][0]}；亮暗两图只算一次。" if rows else reason
     return dict(v=1, at=at, scope=scope, calendar_fingerprint=hashlib.sha256("".join(svgs.values()).encode()).hexdigest() if svgs else None,
-                profile_at=profile_at, profile_scope="本仓 README 与实际配图；随主页内容更新时重取。",
+                profile_at=profile_at, profile_scope="主页正文来自 README；置顶来自 GitHub，配图按正文引用汇总。",
+                mirror_at=mirror_at, pins_at=pins_at,
                 metrics=data, size=size, artifacts=[dict(at=profile_at, kind="page", title="GitHub 个人主页", status="completed", public="same",
                 open=dict(source="profile.readme", href="https://github.com/wlyaaaaa"))] + ([dict(at=at, kind="svg",
                 title=f"贡献小蛇（图上数据到 {rows[-1][0]}）", status="completed", public="same",
@@ -348,7 +355,7 @@ def live_snapshot(root: Path, svgs: dict[str, str], at: str | None, reason="") -
 
 def write_live_snapshot(path: Path, snapshot: dict) -> None:
     previous = json.loads(path.read_text("utf-8")) if path.exists() else {}
-    if snapshot.get("calendar_fingerprint") and previous.get("calendar_fingerprint") == snapshot["calendar_fingerprint"]:
+    if not snapshot.get("mirror_at") and snapshot.get("calendar_fingerprint") and previous.get("calendar_fingerprint") == snapshot["calendar_fingerprint"]:
         snapshot["at"] = previous["at"]
         for artifact in snapshot["artifacts"]:
             if artifact["kind"] == "svg": artifact["at"] = previous["at"]
@@ -356,41 +363,83 @@ def write_live_snapshot(path: Path, snapshot: dict) -> None:
         snapshot["size"]["at"] = previous["size"]["at"]
     path.parent.mkdir(parents=True, exist_ok=True)
     # One JSON object/array per line keeps the small public receipt easy to review.
-    path.write_text("{\n" + ",\n".join("  " + json.dumps(k) + ": " + json.dumps(v, ensure_ascii=False)
-                    for k, v in snapshot.items()) + "\n}\n", encoding="utf-8")
+    temporary = path.with_name(f".{path.name}.{os.getpid()}.tmp")
+    try:
+        temporary.write_text("{\n" + ",\n".join("  " + json.dumps(k) + ": " + json.dumps(v, ensure_ascii=False)
+                             for k, v in snapshot.items()) + "\n}\n", encoding="utf-8")
+        temporary.replace(path)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
+def pinned_repositories(root: Path) -> list:
+    payload = json.loads(subprocess.check_output(
+        ["gh", "api", "graphql", "-f", f"query={PIN_QUERY}"], cwd=root, timeout=25, stderr=subprocess.DEVNULL,
+        env=dict(os.environ, GH_PROMPT_DISABLED="1")))
+    if payload.get("errors"):
+        raise ValueError("GitHub did not return the pinned items")
+    nodes = payload["data"]["user"]["pinnedItems"]["nodes"]
+    return [dict(text=row["name"], href=row["url"], state_text="已置顶")
+            for row in nodes if row and row.get("visibility") == "PUBLIC"]
+
+
+def readme_images(root: Path, published_size) -> dict:
+    readme = (root / "README.md").read_text("utf-8")
+    files = set(re.findall(rf'(?:src|srcset)="{re.escape(OUTPUT_ASSETS)}([\w.-]+)(?:\?[^"]*)?"', readme))
+    return dict(image_kinds=len({re.sub(r"-dark(?=\.[^.]+$)", "", name) for name in files}),
+                image_files=len(files), image_bytes=sum(published_size(name) for name in files))
 
 
 def refresh_live(root: Path, output: Path, target: Path) -> bool:
-    """Read the published output at one immutable commit, without credentials."""
+    """Mirror one published output commit and read the public list of pinned repositories."""
     svgs, at, reason = {}, None, ""
+    mirror_at, published_files, pins, pins_at = None, None, None, None
+    def git(*args):
+        return subprocess.check_output(
+            ["git", *args], cwd=root, timeout=25, env=dict(os.environ, GIT_TERMINAL_PROMPT="0"),
+            stderr=subprocess.DEVNULL)
+
     try:
-        output_ref = "refs/heads/output"
-        remote = subprocess.check_output(
-            ["git", "ls-remote", "--refs", "https://github.com/wlyaaaaa/wlyaaaaa.git", output_ref],
-            cwd=root, text=True, timeout=25, env=dict(os.environ, GIT_TERMINAL_PROMPT="0"),
-        )
-        sha, ref = remote.split()
-        if ref != output_ref or not re.fullmatch(r"[0-9a-f]{40}", sha):
+        remote = f"https://github.com/{PROFILE_REPO}.git"
+        sha, ref = git("ls-remote", "--refs", remote, OUTPUT_REF).decode().split()
+        if ref != OUTPUT_REF or not re.fullmatch(r"[0-9a-f]{40}", sha):
             raise ValueError("Could not resolve the published output commit")
-        base_url = f"https://raw.githubusercontent.com/wlyaaaaa/wlyaaaaa/{sha}"
-        with urllib.request.urlopen(f"{base_url}/live.snapshot.json", timeout=25) as response:
-            at = json.load(response)["at"]
+        git("fetch", "--no-tags", "--no-write-fetch-head", "--no-auto-maintenance", remote, sha)
+        at = json.loads(git("show", f"{sha}:live.snapshot.json"))["at"]
         if not isinstance(at, str) or datetime.fromisoformat(at).utcoffset() is None:
             raise ValueError("Published snake generation time is missing")
         for theme in PALETTES:
             name = "github-contribution-grid-snake" + ("-dark" if theme == "dark" else "") + ".svg"
-            with urllib.request.urlopen(f"{base_url}/{name}", timeout=25) as response:
-                svgs[theme] = response.read().decode("utf-8")
-        snapshot = live_snapshot(root, svgs, at)
+            svgs[theme] = git("show", f"{sha}:{name}").decode("utf-8")
+        mirror_at = datetime.now(timezone.utc).isoformat()
     except (OSError, subprocess.SubprocessError, ValueError, KeyError, ET.ParseError) as error:
-        svgs, reason = {}, f"最新已发布贡献图读取失败（{type(error).__name__}）；未用本地旧图替代。"
-        snapshot = live_snapshot(root, svgs, None, reason)
+        svgs, at = {}, None
+        reason = f"最新已发布贡献图读取失败（{type(error).__name__}）；未用本地旧图替代。"
+        print(reason)
+    if mirror_at:
+        try:
+            published_files = readme_images(root, lambda name: int(git("cat-file", "-s", f"{sha}:{name}")))
+        except (OSError, subprocess.SubprocessError, ValueError) as error:
+            print(f"主页配图读取失败（{type(error).__name__}）。")
+    try:
+        pins = pinned_repositories(root)
+        pins_at = datetime.now(timezone.utc).isoformat()
+    except (OSError, subprocess.SubprocessError, ValueError, KeyError, TypeError) as error:
+        print(f"GitHub 置顶读取失败（{type(error).__name__}）。")
+    try:
+        snapshot = live_snapshot(root, svgs, at, reason, published_files=published_files,
+                                 mirror_at=mirror_at, pins=pins, pins_at=pins_at)
+    except (ET.ParseError, ValueError) as error:
+        print(f"贡献图核对失败（{type(error).__name__}）。")
+        return False
     output.mkdir(parents=True, exist_ok=True)
     for theme, svg in svgs.items():
         name = "github-contribution-grid-snake" + ("-dark" if theme == "dark" else "") + ".svg"
         (output / name).write_text(svg, encoding="utf-8", newline="\n")
     write_live_snapshot(target, snapshot)
-    return bool(svgs)
+    if mirror_at:
+        print(f"GitHub output {sha}，生成于 {at}，本机取到 {mirror_at}")
+    return bool(svgs) and published_files is not None and pins is not None
 
 
 def main() -> int:

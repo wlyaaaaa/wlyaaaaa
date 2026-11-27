@@ -2,22 +2,25 @@
   "v": 1,
   "id": "wlyaaaaa",
   "name": "GitHub 个人主页",
-  "about": "别人点进我 GitHub 先看到的主页：六个项目和一条贡献小蛇。",
+  "about": "别人点进我 GitHub 先看到的主页，放着置顶项目和贡献小蛇。",
   "headline": "contribution_days",
   "tasks": ["github:wlyaaaaa/wlyaaaaa/snake.yml"],
   "skills": [],
   "bindings_complete": true,
   "sections": [
-    {"id":"profile","label":"主页","about":"主页摆了哪些项目，贡献图里有多少天在做东西？","metrics":["profile_observed","cards","contribution_days","longest_streak"],"note":"只数有贡献的日期"},
-    {"id":"more-data","label":"更多数据","about":"好奇：源码入口、配图和小蛇图有多少，图里覆盖哪些日子？","metrics":["source_links","image_files","image_bytes","data_through","calendar_days","last_active","snake_bytes"],"note":"配图亮暗各算一个文件；总体积是两套文件合计，不是打开一次主页的流量。贡献数据只代表图上覆盖的日子。"}
+    {"id":"contribution-snake","label":"贡献小蛇","metrics":["contribution_days","coverage_start","data_through","calendar_days","longest_streak","last_active","mirror_observed","snake_bytes"],"note":"亮暗两张图只算一次贡献。覆盖时间按发布的图上日格。"},
+    {"id":"profile","label":"主页摆了什么","about":"GitHub 上现在的样子","metrics":["cards","source_links","image_kinds","image_files","image_bytes","profile_observed"],"note":"置顶由 GitHub 维护。配图按 README 引用统计，亮暗各算一个文件。"}
   ],
   "metrics": [
-    {"id":"cards","label":"主页上的项目卡片","source":"profile.snapshot","pointer":"/metrics/cards","time":"/profile_at","scope":"/profile_scope","mode":"live","unit":"个","public":"same","records":"/metrics/card_list","shape":"list","note":"从 README 与实际文件生成；主页内容更新后按需重取。"},
-    {"id":"contribution_days","label":"近一年有贡献的天数","source":"profile.snapshot","pointer":"/metrics/contribution_days","mode":"static","unit":"天","public":"same","stale_after":172800},
+    {"id":"cards","label":"置顶项目","source":"profile.snapshot","pointer":"/metrics/cards","time":"/pins_at","scope":"/profile_scope","mode":"live","unit":"个","public":"same","records":"/metrics/card_list","shape":"list","stale_after":172800},
+    {"id":"contribution_days","label":"图上有贡献的天数","source":"profile.snapshot","pointer":"/metrics/contribution_days","mode":"static","unit":"天","public":"same","stale_after":172800},
     {"id":"longest_streak","label":"最长一段连续有贡献","source":"profile.snapshot","pointer":"/metrics/longest_streak","mode":"static","unit":"天","public":"same","stale_after":172800},
-    {"id":"source_links","label":"主页提供的项目源码入口","source":"profile.snapshot","pointer":"/metrics/source_links","time":"/profile_at","scope":"/profile_scope","mode":"live","unit":"个","public":"same"},
-    {"id":"image_files","label":"主页配图文件","source":"profile.snapshot","pointer":"/metrics/image_files","time":"/profile_at","scope":"/profile_scope","mode":"live","unit":"个","public":"same"},
-    {"id":"image_bytes","label":"主页配图总体积","source":"profile.snapshot","pointer":"/metrics/image_bytes","time":"/profile_at","scope":"/profile_scope","mode":"live","unit":"bytes","public":"same"},
+    {"id":"source_links","label":"正文里的项目源码入口","source":"profile.snapshot","pointer":"/metrics/source_links","time":"/profile_at","scope":"/profile_scope","mode":"static","unit":"个","public":"same"},
+    {"id":"image_kinds","label":"主页配图种类","source":"profile.snapshot","pointer":"/metrics/image_kinds","time":"/mirror_at","scope":"/profile_scope","mode":"live","unit":"种","public":"same","stale_after":172800},
+    {"id":"image_files","label":"主页配图文件","source":"profile.snapshot","pointer":"/metrics/image_files","time":"/mirror_at","scope":"/profile_scope","mode":"live","unit":"个","public":"same","stale_after":172800},
+    {"id":"image_bytes","label":"主页配图总体积","source":"profile.snapshot","pointer":"/metrics/image_bytes","time":"/mirror_at","scope":"/profile_scope","mode":"live","unit":"bytes","public":"same","stale_after":172800},
+    {"id":"coverage_start","label":"贡献图覆盖起始日","source":"profile.snapshot","pointer":"/metrics/coverage_start","mode":"static","unit":"","public":"same","stale_after":172800},
+    {"id":"mirror_observed","label":"本机取到贡献图","source":"profile.snapshot","pointer":"/mirror_at","time":"/mirror_at","mode":"live","unit":"","public":"same","stale_after":172800},
     {"id":"data_through","label":"小蛇图数据到哪天","source":"profile.snapshot","pointer":"/metrics/data_through","mode":"static","unit":"","public":"same","stale_after":172800},
     {"id":"calendar_days","label":"小蛇图有日格的天数","source":"profile.snapshot","pointer":"/metrics/calendar_days","mode":"static","unit":"天","public":"same","stale_after":172800},
     {"id":"last_active","label":"图中最近有贡献的日子","source":"profile.snapshot","pointer":"/metrics/last_active","mode":"static","unit":"","public":"same","stale_after":172800},
@@ -26,5 +29,5 @@
   ],
   "artifacts": {"source":"profile.snapshot","pointer":"/artifacts"},
   "size": {"source":"profile.snapshot","pointer":"/size"},
-  "links": [{"id":"intro","label":"项目介绍","href":"https://github.com/wlyaaaaa/wlyaaaaa#readme"}]
+  "links": [{"id":"intro","label":"去主页","href":"https://github.com/wlyaaaaa"}]
 }
