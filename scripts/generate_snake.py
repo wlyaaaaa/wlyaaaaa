@@ -341,7 +341,7 @@ def live_snapshot(root: Path, svgs: dict[str, str], at: str | None, reason="", *
              if Path(p).suffix in {".md", ".py"}]
     fingerprint = hashlib.sha256(b"".join(p.relative_to(root).as_posix().encode() + p.read_bytes() for p in sorted(files))).hexdigest()
     size = dict(at=datetime.now(timezone.utc).isoformat(), fingerprint=fingerprint,
-                docs_chars=sum(len(p.read_text("utf-8-sig")) for p in files if p.suffix == ".md"),
+                docs_chars=sum(len("".join(p.read_text("utf-8-sig").split())) for p in files if p.suffix == ".md"),
                 code_lines=sum(len(p.read_text("utf-8-sig").splitlines()) for p in files if p.suffix == ".py"))
     scope = f"图上数据到 {rows[-1][0]}；覆盖 {rows[0][0]} 至 {rows[-1][0]}；亮暗两图只算一次。" if rows else reason
     return dict(v=1, at=at, scope=scope, calendar_fingerprint=hashlib.sha256("".join(svgs.values()).encode()).hexdigest() if svgs else None,
@@ -359,7 +359,8 @@ def write_live_snapshot(path: Path, snapshot: dict) -> None:
         snapshot["at"] = previous["at"]
         for artifact in snapshot["artifacts"]:
             if artifact["kind"] == "svg": artifact["at"] = previous["at"]
-    if previous.get("size", {}).get("fingerprint") == snapshot["size"]["fingerprint"]:
+    old_size = previous.get("size", {})
+    if all(old_size.get(key) == snapshot["size"][key] for key in ("fingerprint", "docs_chars")):
         snapshot["size"]["at"] = previous["size"]["at"]
     path.parent.mkdir(parents=True, exist_ok=True)
     # One JSON object/array per line keeps the small public receipt easy to review.
